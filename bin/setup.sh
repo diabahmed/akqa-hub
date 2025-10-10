@@ -36,5 +36,5 @@ done
 
 # install node_modules and run dev
 echo Installing dependencies
-yarn
-yarn dev
+pnpm install
+pnpm dev
