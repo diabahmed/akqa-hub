@@ -9,7 +9,7 @@ export const ArticleLabel = ({ children, className, ...props }: ArticleLabelProp
   return (
     <span
       className={twMerge(
-        'rounded bg-purple200 px-2 py-1 text-2xs font-semibold uppercase leading-none tracking-widest text-purple600',
+        'bg-purple200 text-2xs text-purple600 rounded-sm px-2 py-1 leading-none font-semibold tracking-widest uppercase',
         className,
       )}
       {...props}

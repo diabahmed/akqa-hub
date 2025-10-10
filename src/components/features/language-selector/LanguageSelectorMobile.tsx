@@ -43,7 +43,7 @@ export const LanguageSelectorMobile = ({ localeName, onChange, displayName }) =>
             role="presentation"
             tabIndex={-1}
             className={twMerge(
-              'fixed left-0 top-0 h-full w-full bg-colorBlack/[0.4] transition-opacity duration-150',
+              'bg-color-black/40 fixed top-0 left-0 h-full w-full transition-opacity duration-150',
               showDrawer ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
             )}
             onClick={() => setShowDrawer(false)}
@@ -53,7 +53,7 @@ export const LanguageSelectorMobile = ({ localeName, onChange, displayName }) =>
             aria-modal="true"
             aria-hidden={!showDrawer}
             className={twMerge(
-              `fixed right-0 top-0 z-40 h-full w-[80vw] bg-colorWhite px-5 py-8 duration-300 ease-in-out`,
+              `bg-color-white fixed top-0 right-0 z-40 h-full w-[80vw] px-5 py-8 duration-300 ease-in-out`,
               showDrawer ? 'translate-x-0' : 'translate-x-full',
             )}
           >
@@ -65,9 +65,9 @@ export const LanguageSelectorMobile = ({ localeName, onChange, displayName }) =>
               </button>
             </div>
 
-            <p className="mt-8 text-base font-semibold text-colorBlack"> {t('common.language')}</p>
+            <p className="text-color-black mt-8 text-base font-semibold"> {t('common.language')}</p>
             <select
-              className="mt-2 block w-full rounded-md border border-gray300 px-2 py-2 text-sm"
+              className="border-gray300 mt-2 block w-full rounded-md border px-2 py-2 text-sm"
               defaultValue={currentLocale}
               onChange={onChange}
             >

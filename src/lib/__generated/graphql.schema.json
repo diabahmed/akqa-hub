@@ -5430,7 +5430,7 @@
           },
           {
             "name": "cornerRadius",
-            "description": "Desired corner radius in pixels.\n        Results in an image with rounded corners (pass `-1` for a full circle/ellipse).\n        Defaults to `0`. Uses desired background color as padding color,\n        unless the format is `JPG` or `JPG_PROGRESSIVE` and resize strategy is `PAD`, then defaults to white.",
+            "description": "Desired corner radius in pixels.\n        Results in an image with rounded-sm corners (pass `-1` for a full circle/ellipse).\n        Defaults to `0`. Uses desired background color as padding color,\n        unless the format is `JPG` or `JPG_PROGRESSIVE` and resize strategy is `PAD`, then defaults to white.",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
