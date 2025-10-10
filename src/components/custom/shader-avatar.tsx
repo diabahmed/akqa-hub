@@ -1,6 +1,7 @@
 'use client';
 
 import { MeshGradient } from '@paper-design/shaders-react';
+
 import { Avatar } from '../ui/avatar';
 
 export default function ShaderAvatar() {
