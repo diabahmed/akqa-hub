@@ -233,13 +233,6 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# VS Code
-.vscode/
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
 # Playwright
 test-results/
 playwright-report/
