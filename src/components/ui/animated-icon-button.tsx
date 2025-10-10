@@ -1,14 +1,13 @@
 'use client';
 
 import type { VariantProps } from 'class-variance-authority';
+import { Check, Copy, Heart, Star, ThumbsUp } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import * as React from 'react';
 
 import { Button, buttonVariants } from '@src/components/ui/button';
-import { cn } from '@src/lib/utils';
-
-import { Check, Copy, Heart, Star, ThumbsUp } from 'lucide-react';
 import { useClipboard } from '@src/hooks/use-clipboard';
+import { cn } from '@src/lib/utils';
 
 type AnimatedIconButtonProps = Omit<React.ComponentProps<typeof Button>, 'children'> &
   VariantProps<typeof buttonVariants> & {
