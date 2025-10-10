@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config({ quiet: true });
 const nextComposePlugins = require('next-compose-plugins');
 
 const headers = require('./config/headers');
@@ -64,6 +64,19 @@ module.exports = withPlugins(plugins, {
         hostname: 'images.eu.ctfassets.net',
       },
     ],
+  },
+
+  /**
+   * Turbopack configuration for development
+   * documentation: https://nextjs.org/docs/app/api-reference/next-config-js/turbopack
+   */
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
   },
 
   webpack(config) {
