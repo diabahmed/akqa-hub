@@ -1,0 +1,20 @@
+services:
+  akqa-hub:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD_STANDALONE: true
+    image: akqa-hub:latest
+    container_name: akqa-hub
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - akqa-network
+
+networks:
+  akqa-network:
+    driver: bridge
