@@ -1,8 +1,9 @@
-const dotenv = require('dotenv').config({ quiet: true });
-const nextComposePlugins = require('next-compose-plugins');
+import dotenv from 'dotenv';
+dotenv.config({ quiet: true });
+import nextComposePlugins from 'next-compose-plugins';
 
-const headers = require('./config/headers');
-const plugins = require('./config/plugins');
+import headers from './config/headers.js';
+import plugins from './config/plugins.js';
 
 /**
  * https://github.com/cyrilwanner/next-compose-plugins/issues/59
@@ -13,7 +14,9 @@ const { withPlugins } = nextComposePlugins.extend(() => ({}));
  * Next config
  * documentation: https://nextjs.org/docs/api-reference/next.config.js/introduction
  */
-module.exports = withPlugins(plugins, {
+export default withPlugins(plugins, {
+  output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
+
   /**
    * add the environment variables you would like exposed to the client here
    * documentation: https://nextjs.org/docs/api-reference/next.config.js/environment-variables
@@ -41,6 +44,8 @@ module.exports = withPlugins(plugins, {
 
   poweredByHeader: false,
   compress: true,
+  assetPrefix: '/exp1-static',
+  transpilePackages: ['@workspace/ui'],
 
   /**
    * add the headers you would like your next server to use
@@ -63,6 +68,10 @@ module.exports = withPlugins(plugins, {
         protocol: 'https',
         hostname: 'images.eu.ctfassets.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+      },
     ],
   },
 
@@ -74,16 +83,33 @@ module.exports = withPlugins(plugins, {
     rules: {
       '*.svg': {
         loaders: ['@svgr/webpack'],
-        as: '*.js',
+        as: '*.ts',
       },
     },
   },
 
   webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
+    // Grab the existing rule that handles SVG imports
+    const fileLoaderRule = config.module.rules.find(rule => rule.test?.test?.('.svg'));
+
+    config.module.rules.push(
+      // Reapply the existing rule, but only for svg imports ending in ?url
+      {
+        ...fileLoaderRule,
+        test: /\.svg$/i,
+        resourceQuery: /url/, // *.svg?url
+      },
+      // Convert all other *.svg imports to React components
+      {
+        test: /\.svg$/i,
+        issuer: fileLoaderRule.issuer,
+        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
+        use: ['@svgr/webpack'],
+      },
+    );
+
+    // Modify the file loader rule to ignore *.svg, since we have it handled now.
+    fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
   },

@@ -1,13 +1,13 @@
-const { FlatCompat } = require('@eslint/eslintrc');
-const js = require('@eslint/js');
+import js from '@eslint/js';
+import { FlatCompat } from '@eslint/eslintrc';
 
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  baseDirectory: import.meta.dirname,
   recommendedConfig: js.configs.recommended,
   allConfig: js.configs.all,
 });
 
-module.exports = [
+const eslintConfig = [
   // Ignore patterns
   {
     ignores: [
@@ -25,13 +25,14 @@ module.exports = [
   },
 
   // Base configuration extending Next.js configs first
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...compat.config({
+    extends: ['eslint:recommended', 'next', 'prettier', 'next/core-web-vitals', 'next/typescript'],
+  }),
 
   // Additional configuration
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
-      parser: require('@babel/eslint-parser'),
       parserOptions: {
         requireConfigFile: false,
         ecmaVersion: 2018,
@@ -116,7 +117,6 @@ module.exports = [
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      parser: require('@typescript-eslint/parser'),
       parserOptions: {
         ecmaVersion: 2018,
         sourceType: 'module',
@@ -128,3 +128,5 @@ module.exports = [
     },
   },
 ];
+
+export default eslintConfig;
