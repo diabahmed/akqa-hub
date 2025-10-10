@@ -1,12 +1,10 @@
-import { LanguageIcon, ChevronDownIcon, ChevronUpIcon } from '@contentful/f36-icons';
-import { useCurrentLocale } from 'next-i18n-router/client';
+import { GlobeIcon, CaretDownIcon, CaretUpIcon } from '@contentful/f36-icons';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import FocusLock from 'react-focus-lock';
 import { twMerge } from 'tailwind-merge';
 
-import i18nConfig, { locales } from '@src/i18n/config';
+import { locales } from '@src/i18n/config';
 
 const useClickOutside = (ref, setIsOpen) => {
   useEffect(() => {
@@ -23,18 +21,34 @@ const useClickOutside = (ref, setIsOpen) => {
   }, [ref, setIsOpen]);
 };
 
-export const LanguageSelectorDesktop = ({ localeName, onChange, displayName }) => {
-  const currentLocale = useCurrentLocale(i18nConfig);
+interface LanguageSelectorDesktopProps {
+  localeName: (locale: string) => string;
+  onChange: (event: any) => void;
+  displayName: (locale: string) => Intl.DisplayNames;
+  currentLocale: string;
+  currentPathname: string;
+}
+
+export const LanguageSelectorDesktop = ({
+  localeName,
+  onChange,
+  displayName,
+  currentLocale,
+  currentPathname,
+}: LanguageSelectorDesktopProps) => {
+  // Simple, stable hooks only
+  const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const localesToShow = locales.filter(locale => locale !== currentLocale);
-  const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
-  // Try to extract and match a locale from a pattern of `/en-US/:slug`
-  const pathnameHasLocale = locales.includes(pathname.slice(1, 6));
-  const pathnameWithoutLocale = pathname.slice(6);
 
+  // Effect hook
   useClickOutside(containerRef, setIsOpen);
+
+  // Derived values after all hooks
+  const localesToShow = locales.filter(locale => locale !== currentLocale);
+  // Try to extract and match a locale from a pattern of `/en-US/:slug`
+  const pathnameHasLocale = locales.includes(currentPathname.slice(1, 6));
+  const pathnameWithoutLocale = currentPathname.slice(6);
 
   const handleMenuKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
     switch (e.key) {
@@ -96,12 +110,12 @@ export const LanguageSelectorDesktop = ({ localeName, onChange, displayName }) =
         className="flex items-center font-normal uppercase"
         onClick={() => setIsOpen(currentState => !currentState)}
       >
-        <LanguageIcon width="18px" height="18px" variant="secondary" className="mr-1 ml-1" />
+        <GlobeIcon width="18px" height="18px" variant="secondary" className="ml-1 mr-1" />
         {localeName(currentLocale)}
         {isOpen ? (
-          <ChevronUpIcon variant="secondary" className="pl-1" />
+          <CaretUpIcon variant="secondary" className="pl-1" />
         ) : (
-          <ChevronDownIcon variant="secondary" className="pl-1" />
+          <CaretDownIcon variant="secondary" className="pl-1" />
         )}
       </button>
       <FocusLock disabled={!isOpen} returnFocus={true}>
@@ -125,9 +139,8 @@ export const LanguageSelectorDesktop = ({ localeName, onChange, displayName }) =
                   href={
                     pathnameHasLocale
                       ? `/${availableLocale}${pathnameWithoutLocale}`
-                      : `/${availableLocale}${pathname}`
+                      : `/${availableLocale}${currentPathname}`
                   }
-                  locale={availableLocale}
                   onClick={event => {
                     onChange(event);
                     setIsOpen(false);

@@ -55,6 +55,8 @@ export const LanguageSelector = () => {
           displayName={displayName}
           onChange={handleLocaleChange}
           localeName={localeName}
+          currentLocale={currentLocale}
+          currentPathname={currentPathname}
         />
       </div>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { LanguageIcon, CloseIcon } from '@contentful/f36-icons';
+import { GlobeIcon, XIcon } from '@contentful/f36-icons';
 import { useCurrentLocale } from 'next-i18n-router/client';
 import { useEffect, useState } from 'react';
 import FocusLock from 'react-focus-lock';
@@ -34,7 +34,7 @@ export const LanguageSelectorMobile = ({ localeName, onChange, displayName }) =>
         aria-expanded={showDrawer}
         aria-controls="locale-drawer"
       >
-        <LanguageIcon width="18px" height="18px" variant="secondary" />
+        <GlobeIcon width="18px" height="18px" variant="secondary" />
       </button>
 
       <Portal>
@@ -43,7 +43,7 @@ export const LanguageSelectorMobile = ({ localeName, onChange, displayName }) =>
             role="presentation"
             tabIndex={-1}
             className={twMerge(
-              'fixed top-0 left-0 h-full w-full bg-colorBlack/[0.4] transition-opacity duration-150',
+              'fixed left-0 top-0 h-full w-full bg-colorBlack/[0.4] transition-opacity duration-150',
               showDrawer ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
             )}
             onClick={() => setShowDrawer(false)}
@@ -53,7 +53,7 @@ export const LanguageSelectorMobile = ({ localeName, onChange, displayName }) =>
             aria-modal="true"
             aria-hidden={!showDrawer}
             className={twMerge(
-              `fixed top-0 right-0 z-40 h-full w-[80vw] bg-colorWhite py-8 px-5 duration-300 ease-in-out `,
+              `fixed right-0 top-0 z-40 h-full w-[80vw] bg-colorWhite px-5 py-8 duration-300 ease-in-out`,
               showDrawer ? 'translate-x-0' : 'translate-x-full',
             )}
           >
@@ -61,13 +61,13 @@ export const LanguageSelectorMobile = ({ localeName, onChange, displayName }) =>
               <h2 className="text-xl font-semibold">{t('common.regionalSettings')}</h2>
 
               <button className="ml-auto pl-2" onClick={() => setShowDrawer(false)}>
-                <CloseIcon width="18px" height="18px" variant="secondary" />
+                <XIcon width="18px" height="18px" variant="secondary" />
               </button>
             </div>
 
             <p className="mt-8 text-base font-semibold text-colorBlack"> {t('common.language')}</p>
             <select
-              className="mt-2 block w-full rounded-md border border-gray300 py-2 px-2 text-sm"
+              className="mt-2 block w-full rounded-md border border-gray300 px-2 py-2 text-sm"
               defaultValue={currentLocale}
               onChange={onChange}
             >
