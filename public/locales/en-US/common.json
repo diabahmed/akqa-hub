@@ -7,8 +7,8 @@
     "latestArticles": "Latest articles"
   },
   "common": {
-    "regionalSettings": "Regional Settings",
     "homepage": "Homepage",
+    "regionalSettings": "Regional Settings",
     "language": "Language",
     "languageDrawer": "Toggle language drawer"
   },
