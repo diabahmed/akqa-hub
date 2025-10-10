@@ -1,3 +1,4 @@
+import { AIDevtools } from '@ai-sdk-tools/devtools';
 import { dir } from 'i18next';
 import type { Metadata, Viewport } from 'next';
 import { Urbanist } from 'next/font/google';
@@ -7,6 +8,7 @@ import { ContentfulPreviewProvider } from '@src/components/features/contentful';
 import TranslationsProvider from '@src/components/shared/i18n/TranslationProvider';
 import { Footer } from '@src/components/templates/footer';
 import { Header } from '@src/components/templates/header';
+import { Toaster } from '@src/components/ui/sonner';
 import initTranslations from '@src/i18n';
 import { locales } from '@src/i18n/config';
 
@@ -47,7 +49,7 @@ export default async function PageLayout({ children, params }: LayoutProps) {
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
       </head>
 
-      <body>
+      <body suppressHydrationWarning={true} className="antialiased">
         <TranslationsProvider locale={locale} resources={resources}>
           <ContentfulPreviewProvider
             locale={locale}
@@ -59,10 +61,18 @@ export default async function PageLayout({ children, params }: LayoutProps) {
               <Header />
               {children}
               <Footer />
+              <Toaster position="top-center" closeButton richColors />
             </main>
             <div id="portal" className={`${urbanist.variable} font-sans`} />
           </ContentfulPreviewProvider>
         </TranslationsProvider>
+        <AIDevtools
+          config={{
+            enabled: process.env.NODE_ENV === 'development',
+            position: 'overlay',
+            theme: 'auto',
+          }}
+        />
       </body>
     </html>
   );
