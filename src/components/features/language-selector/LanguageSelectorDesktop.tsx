@@ -81,7 +81,7 @@ export const LanguageSelectorDesktop = ({
 
         break;
       case 'ArrowUp':
-      case 'ArrowDown':
+      case 'ArrowDown': {
         e.stopPropagation();
         e.preventDefault();
 
@@ -96,6 +96,7 @@ export const LanguageSelectorDesktop = ({
         }
 
         break;
+      }
       default:
         break;
     }
