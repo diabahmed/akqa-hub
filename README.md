@@ -2,8 +2,6 @@
 
 A Blog Starter Template powered by Next.js & Contentful, pre-designed with optimized & adjustable pages, components, and data management.
 
-![The homepage of the Blog Starter Template](blog-starter-template.jpg 'The homepage of the Blog Starter Template')
-
 $~$
 
 ## What is Contentful?
@@ -75,13 +73,13 @@ $~$
 To install the necessary dependencies, run:
 
 ```bash
-yarn
+pnpm install
 ```
 
 ### Run the Starter Template in development mode
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 The Starter Template should be up and running on `http://localhost:3000`.
@@ -213,39 +211,20 @@ _\*The `slug` field is optional; When not passed we redirect the page to the roo
 3. Add a new URL with the following format: `https://<your-site>/api/enable-draft?path=%2F{locale}%2F{entry.fields.slug}&x-contentful-preview-secret=<token>`. Make sure to replace `<your-site>` with the URL of your Next.js site, and `<token>` with the value of `process.env.CONTENTFUL_PREVIEW_SECRET`.
 4. Now, when you view an unpublished entry in Contentful, you should see a "Preview" button that will take you to the preview URL for that entry. Clicking this button should show you a preview of the entry on your Next.js site, using the draft API route that we set up earlier.
 
-
 $~$
 
 ---
 
 $~$
 
-## Support
-
-If you have a problem with this Starter Template, post a message in our [Contentful Community Slack](https://www.contentful.com/slack/).
-
-Can't find your answer there? You can file a feedback issue through [this template](https://github.com/contentful/template-blog-webapp-nextjs/tree/main/.github/ISSUE_TEMPLATE/feedback.md).
-
-If you have other problems with Contentful not related to the Starter Template, you can contact the [Customer Support](https://support.contentful.com/).
-
-$~$
-
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-$~$
-
-## License
-
-MIT License, see [LICENSE](./LICENSE).
-
-$~$
-
 <!-- FOOTNOTES -->
 
 [^1]: [Next.js docs](https://nextjs.org/docs/basic-features/data-fetching/get-static-props)
+
 [^2]: [GraphQL docs](https://graphql.org/learn/)
+
 [^3]: [graphql-codegen](https://www.the-guild.dev/graphql/codegen)
+
 [^4]: [TypeScript](https://www.typescriptlang.org/)
+
 [^note]: [React docs](https://reactjs.org/docs/getting-started.html)
