@@ -54,7 +54,7 @@ const AnimatedIconButton = React.forwardRef<HTMLButtonElement, AnimatedIconButto
         ref={ref}
         variant={variant}
         size={size}
-        className={cn('relative cursor-pointer overflow-hidden', className)}
+        className={cn('relative overflow-hidden', className)}
         {...props}
       >
         <AnimatePresence mode="popLayout" initial={false}>
