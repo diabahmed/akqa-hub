@@ -11,7 +11,7 @@ import { AnimatedThemeToggler } from '@src/components/ui/animated-theme-toggler'
 
 export const Header = () => {
   const { scrollY } = useScroll();
-  const { resolvedTheme } = useTheme();
+  const { resolvedTheme, theme } = useTheme();
   const [hidden, setHidden] = useState(false);
 
   useMotionValueEvent(scrollY, 'change', latest => {
@@ -23,7 +23,9 @@ export const Header = () => {
     }
   });
 
-  const logoSrc = resolvedTheme === 'dark' ? '/assets/svg/logo.svg' : '/assets/svg/logo-dark.svg';
+  // Use resolvedTheme if available, fall back to theme, default to 'dark' for safety
+  const currentTheme = resolvedTheme || theme || 'dark';
+  const logoSrc = currentTheme === 'dark' ? '/assets/svg/logo.svg' : '/assets/svg/logo-dark.svg';
 
   return (
     <motion.nav

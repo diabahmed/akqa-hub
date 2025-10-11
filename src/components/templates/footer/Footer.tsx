@@ -8,8 +8,11 @@ import Balancer from 'react-wrap-balancer';
 import { Section, Container } from '../../ui/crafts';
 
 export const Footer = () => {
-  const { resolvedTheme } = useTheme();
-  const logoSrc = resolvedTheme === 'dark' ? '/assets/svg/logo.svg' : '/assets/svg/logo-dark.svg';
+  const { resolvedTheme, theme } = useTheme();
+
+  // Use resolvedTheme if available, fall back to theme, default to 'dark' for safety
+  const currentTheme = resolvedTheme || theme || 'dark';
+  const logoSrc = currentTheme === 'dark' ? '/assets/svg/logo.svg' : '/assets/svg/logo-dark.svg';
 
   return (
     <footer className="not-prose border-t">
