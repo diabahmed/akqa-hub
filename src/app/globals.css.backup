@@ -1,0 +1,448 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* --------------------------------------------------------------------------
+   Variants & Plugins (v4 syntax)
+--------------------------------------------------------------------------- */
+@custom-variant dark (&:is(.dark *));
+@plugin "@tailwindcss/typography";
+
+/* --------------------------------------------------------------------------
+   Design system color catalog (token-first). These names drive classes like:
+   text-gray800, bg-blue500, text-color-text-mid, etc.
+--------------------------------------------------------------------------- */
+@theme {
+  /* allow custom colors without warnings */
+  --color-*: initial;
+
+  /* Core palette (kept exactly as your names so classes keep working) */
+  --color-color-black: #0c141c;
+
+  --color-color-blue-lightest: #e8f5ff;
+  --color-color-blue-light: #98cbff;
+  --color-color-blue-mid: #036fe3;
+  --color-color-blue-base: #0059c8;
+  --color-color-blue-dark: #0041ab;
+
+  --color-blue100: #e8f5ff;
+  --color-blue200: #ceecff;
+  --color-blue300: #98cbff;
+  --color-blue400: #40a0ff;
+  --color-blue500: #036fe3;
+  --color-blue600: #0059c8;
+  --color-blue700: #0041ab;
+  --color-blue800: #003298;
+  --color-blue900: #002a8e;
+
+  --color-color-contrast-dark: #0c141c;
+  --color-color-contrast-mid: #111b2b;
+  --color-color-contrast-light: #1b273a;
+
+  --color-color-coral-dark: #ffe0e0;
+  --color-color-coral-mid: #fff2f2;
+
+  --color-color-element-darkest: #67728a;
+  --color-color-element-dark: #aec1cc;
+  --color-color-element-mid: #cfd9e0;
+  --color-color-element-light: #e7ebee;
+  --color-color-element-lightest: #f7f9fa;
+
+  --color-gray100: #f7f9fa;
+  --color-gray200: #e7ebee;
+  --color-gray300: #cfd9e0;
+  --color-gray400: #aec1cc;
+  --color-gray500: #67728a;
+  --color-gray600: #5a657c;
+  --color-gray700: #414d63;
+  --color-gray800: #1b273a;
+  --color-gray900: #111b2b;
+
+  --color-color-green-dark: #00550c;
+  --color-color-green-base: #006d23;
+  --color-color-green-mid: #008539;
+  --color-color-green-light: #9ed696;
+  --color-color-green-lightest: #eaf9e8;
+
+  --color-green100: #eaf9e8;
+  --color-green200: #cdf3c6;
+  --color-green300: #9ed696;
+  --color-green400: #5db057;
+  --color-green500: #008539;
+  --color-green600: #006d23;
+  --color-green700: #00550c;
+  --color-green800: #004700;
+  --color-green900: #003f00;
+
+  --color-color-ice-dark: #ceecff;
+  --color-color-ice-mid: #e8f5ff;
+  --color-color-mint-dark: #cdf3c6;
+  --color-color-mint-mid: #eaf9e8;
+
+  --color-color-orange-dark: #b12d00;
+  --color-color-orange-base: #cc4500;
+  --color-color-orange-mid: #f07f23;
+  --color-color-orange-light: #fde5c0;
+  --color-color-orange-lightest: #fff2e4;
+
+  --color-orange100: #fff2e4;
+  --color-orange200: #fde5c0;
+  --color-orange300: #fdb882;
+  --color-orange400: #f07f23;
+  --color-orange500: #cc4500;
+  --color-orange600: #b12d00;
+  --color-orange700: #892300;
+  --color-orange800: #731a00;
+  --color-orange900: #631c00;
+
+  --color-color-peach-dark: #fde5c0;
+  --color-color-peach-mid: #fff2e4;
+
+  --color-color-purple-dark: #5127b5;
+  --color-color-purple-base: #6c3ecf;
+  --color-color-purple-mid: #8553e7;
+  --color-color-purple-light: #d1bbff;
+  --color-color-purple-lightest: #f7f2ff;
+
+  --color-purple100: #f7f2ff;
+  --color-purple200: #ede3ff;
+  --color-purple300: #d1bbff;
+  --color-purple400: #ae89ff;
+  --color-purple500: #8553e7;
+  --color-purple600: #6c3ecf;
+  --color-purple700: #5127b5;
+  --color-purple800: #3e16a4;
+  --color-purple900: #340e9c;
+
+  --color-color-red-dark: #990017;
+  --color-color-red-base: #bd002a;
+  --color-color-red-mid: #da294a;
+  --color-color-red-light: #ffb1b2;
+  --color-color-red-lightest: #fff2f2;
+
+  --color-red100: #fff2f2;
+  --color-red200: #ffe0e0;
+  --color-red300: #ffb1b2;
+  --color-red400: #ff707d;
+  --color-red500: #da294a;
+  --color-red600: #bd002a;
+  --color-red700: #990017;
+  --color-red800: #7f0010;
+  --color-red900: #72000e;
+
+  --color-color-primary: #0059c8;
+  --color-color-positive: #006d23;
+  --color-color-negative: #bd002a;
+  --color-color-warning: #cc4500;
+
+  --color-color-text-dark: #111b2b;
+  --color-color-text-base: #1b273a;
+  --color-color-text-mid: #414d63;
+  --color-color-text-light: #5a657c;
+  --color-color-text-lightest: #67728a;
+
+  --color-color-white: #ffffff;
+
+  --color-color-yellow-dark: #956300;
+  --color-color-yellow-base: #eaaf09;
+  --color-color-yellow-mid: #ffc835;
+  --color-color-yellow-light: #ffd960;
+  --color-color-yellow-lightest: #fff6cc;
+
+  --color-yellow100: #fef9df;
+  --color-yellow200: #fff6cc;
+  --color-yellow300: #ffe993;
+  --color-yellow400: #ffd960;
+  --color-yellow500: #ffc835;
+  --color-yellow600: #eaaf09;
+  --color-yellow700: #b78300;
+  --color-yellow800: #956300;
+  --color-yellow900: #7f5200;
+
+  /* Layout / type scale tokens */
+  --container-8xl: 90rem;
+
+  --tracking-snug: -0.011em;
+
+  --text-2xs: 0.625rem;
+  --text-3xl: 1.75rem;
+  --text-4xl: 2.5rem;
+
+  --leading-tighter: 1.1;
+
+  --font-sans:
+    var(--font-urbanist), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* --------------------------------------------------------------------------
+   v3 → v4 default border-color compatibility (point to your gray200 token).
+--------------------------------------------------------------------------- */
+@layer base {
+  *,
+  ::before,
+  ::after,
+  ::backdrop,
+  ::file-selector-button {
+    /* prefer your token, fall back to v4 gray-200 if you add it later, else currentcolor */
+    border-color: var(--color-gray200, var(--color-gray-200, currentcolor));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Type ramp & base elements (uses your token names directly)
+--------------------------------------------------------------------------- */
+@layer base {
+  body {
+    @apply text-gray800 bg-gray100 text-sm md:text-sm;
+  }
+
+  .h1,
+  h1 {
+    @apply leading-tighter text-xl font-semibold md:text-4xl;
+  }
+
+  .h2,
+  h2 {
+    @apply text-xl leading-tight font-semibold md:text-3xl;
+  }
+
+  .h3,
+  h3 {
+    @apply text-base leading-relaxed font-semibold md:text-xl;
+  }
+
+  .h4,
+  h4 {
+    @apply text-xs leading-normal font-semibold md:text-base;
+  }
+
+  p {
+    @apply text-gray600 tracking-snug leading-snug font-normal md:leading-normal;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Semantic theme bridge (OKLCH tokens) → Tailwind v4 --color-* tokens.
+   Enables utilities like bg-background, text-foreground, ring-ring, etc.
+--------------------------------------------------------------------------- */
+@theme inline {
+  /* radius ladder (kept twice in source; de-duped but values maintained) */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* semantic colors (use directly in utilities, e.g., bg-background) */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* charts + sidebar */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* family aliases */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  /* shadow aliases (so utilities like shadow-2xl resolve your presets) */
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+}
+
+/* --------------------------------------------------------------------------
+   Light theme tokens (OKLCH) — source of truth for semantic colors above.
+--------------------------------------------------------------------------- */
+:root {
+  --background: oklch(0.9821 0 0);
+  --foreground: oklch(0.3485 0 0);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.3485 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.3485 0 0);
+
+  --primary: oklch(0.4891 0 0);
+  --primary-foreground: oklch(0.9551 0 0);
+
+  --secondary: oklch(0.9006 0 0);
+  --secondary-foreground: oklch(0.3485 0 0);
+
+  --muted: oklch(0.9158 0 0);
+  --muted-foreground: oklch(0.4313 0 0);
+
+  --accent: oklch(0.9354 0.0456 94.8549);
+  --accent-foreground: oklch(0.4015 0.0436 37.9587);
+
+  --destructive: oklch(0.6627 0.0978 20.0041);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.5538 0.0025 17.232);
+  --input: oklch(0.8203 0 0);
+  --ring: oklch(0.7058 0 0);
+
+  --chart-1: oklch(0.3211 0 0);
+  --chart-2: oklch(0.4495 0 0);
+  --chart-3: oklch(0.5693 0 0);
+  --chart-4: oklch(0.683 0 0);
+  --chart-5: oklch(0.7921 0 0);
+
+  --sidebar: oklch(0.9551 0 0);
+  --sidebar-foreground: oklch(0.3485 0 0);
+  --sidebar-primary: oklch(0.4891 0 0);
+  --sidebar-primary-foreground: oklch(0.9551 0 0);
+  --sidebar-accent: oklch(0.9354 0.0456 94.8549);
+  --sidebar-accent-foreground: oklch(0.4015 0.0436 37.9587);
+  --sidebar-border: oklch(0.8078 0 0);
+  --sidebar-ring: oklch(0.7058 0 0);
+
+  --font-sans: Instrument Sans, ui-sans-serif, sans-serif, system-ui;
+  --font-serif: Instrument Serif, ui-serif, serif;
+  --font-mono: JetBrains Mono, ui-monospace, monospace;
+
+  --radius: 0.625rem;
+
+  /* shadow primitives + presets */
+  --shadow-x: 1px;
+  --shadow-y: 4px;
+  --shadow-blur: 5px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.03;
+  --shadow-color: #000000;
+
+  --shadow-2xs: 1px 4px 5px 0px hsl(0 0% 0% / 0.01);
+  --shadow-xs: 1px 4px 5px 0px hsl(0 0% 0% / 0.01);
+  --shadow-sm: 1px 4px 5px 0px hsl(0 0% 0% / 0.03), 1px 1px 2px -1px hsl(0 0% 0% / 0.03);
+  --shadow: 1px 4px 5px 0px hsl(0 0% 0% / 0.03), 1px 1px 2px -1px hsl(0 0% 0% / 0.03);
+  --shadow-md: 1px 4px 5px 0px hsl(0 0% 0% / 0.03), 1px 2px 4px -1px hsl(0 0% 0% / 0.03);
+  --shadow-lg: 1px 4px 5px 0px hsl(0 0% 0% / 0.03), 1px 4px 6px -1px hsl(0 0% 0% / 0.03);
+  --shadow-xl: 1px 4px 5px 0px hsl(0 0% 0% / 0.03), 1px 8px 10px -1px hsl(0 0% 0% / 0.03);
+  --shadow-2xl: 1px 4px 5px 0px hsl(0 0% 0% / 0.07);
+
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   Dark theme tokens (OKLCH)
+--------------------------------------------------------------------------- */
+.dark {
+  --background: oklch(0.2891 0 0);
+  --foreground: oklch(0.8945 0 0);
+
+  --card: oklch(0.3211 0 0);
+  --card-foreground: oklch(0.8945 0 0);
+
+  --popover: oklch(0.3211 0 0);
+  --popover-foreground: oklch(0.8945 0 0);
+
+  --primary: oklch(0.7572 0 0);
+  --primary-foreground: oklch(0.2891 0 0);
+
+  --secondary: oklch(0.4676 0 0);
+  --secondary-foreground: oklch(0.8078 0 0);
+
+  --muted: oklch(0.3904 0 0);
+  --muted-foreground: oklch(0.7058 0 0);
+
+  --accent: oklch(0.9067 0 0);
+  --accent-foreground: oklch(0.3211 0 0);
+
+  --destructive: oklch(0.7915 0.0491 18.241);
+  --destructive-foreground: oklch(0.2891 0 0);
+
+  --border: oklch(0.4276 0 0);
+  --input: oklch(0.5999 0 0);
+  --ring: oklch(0.8078 0 0);
+
+  --chart-1: oklch(0.9521 0 0);
+  --chart-2: oklch(0.8576 0 0);
+  --chart-3: oklch(0.7572 0 0);
+  --chart-4: oklch(0.6534 0 0);
+  --chart-5: oklch(0.5452 0 0);
+
+  --sidebar: oklch(0.2478 0 0);
+  --sidebar-foreground: oklch(0.8945 0 0);
+  --sidebar-primary: oklch(0.7572 0 0);
+  --sidebar-primary-foreground: oklch(0.2478 0 0);
+  --sidebar-accent: oklch(0.9067 0 0);
+  --sidebar-accent-foreground: oklch(0.3211 0 0);
+  --sidebar-border: oklch(0.4276 0 0);
+  --sidebar-ring: oklch(0.8078 0 0);
+
+  --font-sans: Instrument Sans, ui-sans-serif, sans-serif, system-ui;
+  --font-serif: Instrument Serif, ui-serif, serif;
+  --font-mono: JetBrains Mono, ui-monospace, monospace;
+
+  --radius: 0.625rem;
+
+  /* keep shadow presets identical in dark (as per source) */
+  --shadow-x: 1px;
+  --shadow-y: 4px;
+  --shadow-blur: 5px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.03;
+  --shadow-color: #000000;
+
+  --shadow-2xs: 1px 4px 5px 0px hsl(0 0% 0% / 0.01);
+  --shadow-xs: 1px 4px 5px 0px hsl(0 0% 0% / 0.01);
+  --shadow-sm: 1px 4px 5px 0px hsl(0 0% 0% / 0.03), 1px 1px 2px -1px hsl(0 0% 0% / 0.03);
+  --shadow: 1px 4px 5px 0px hsl(0 0% 0% / 0.03), 1px 1px 2px -1px hsl(0 0% 0% / 0.03);
+  --shadow-md: 1px 4px 5px 0px hsl(0 0% 0% / 0.03), 1px 2px 4px -1px hsl(0 0% 0% / 0.03);
+  --shadow-lg: 1px 4px 5px 0px hsl(0 0% 0% / 0.03), 1px 4px 6px -1px hsl(0 0% 0% / 0.03);
+  --shadow-xl: 1px 4px 5px 0px hsl(0 0% 0% / 0.03), 1px 8px 10px -1px hsl(0 0% 0% / 0.03);
+  --shadow-2xl: 1px 4px 5px 0px hsl(0 0% 0% / 0.07);
+}
+
+/* --------------------------------------------------------------------------
+   Global glue
+--------------------------------------------------------------------------- */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  button:not([disabled]),
+  [role="button"]:not([disabled]) {
+    cursor: pointer;
+  }
+}
