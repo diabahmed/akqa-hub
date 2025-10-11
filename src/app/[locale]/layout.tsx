@@ -67,8 +67,8 @@ export default async function PageLayout({ children, params }: LayoutProps) {
       <body className="px-4 xl:px-0">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <TranslationsProvider locale={locale} resources={resources}>
