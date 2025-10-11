@@ -197,6 +197,7 @@ export function DottedGlowBackground({
 
     const draw = (now: number) => {
       if (stopped) return;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const dt = (now - last) / 1000; // seconds
       last = now;
       const { width, height } = container.getBoundingClientRect();
