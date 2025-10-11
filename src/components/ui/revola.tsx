@@ -176,7 +176,7 @@ const ResponsiveDialogClose = ({
 };
 ResponsiveDialogClose.displayName = 'ResponsiveDialogClose';
 
-const ResponsiveDialogContentVariants = cva('fixed z-[9999] bg-background', {
+const ResponsiveDialogContentVariants = cva('fixed z-9999 bg-background', {
   variants: {
     device: {
       desktop:
@@ -281,7 +281,7 @@ const ResponsiveDialogContent = React.forwardRef<
           {!shouldUseDialog && direction === 'bottom' && (
             <div
               className={cn(
-                'bg-muted-foreground/25 dark:bg-muted mx-auto my-4 h-1.5 w-14 rounded-full pb-1.5 data-[vaul-handle]:h-1.5 data-[vaul-handle]:w-14 data-[vaul-handle]:pb-1.5',
+                'bg-muted-foreground/25 dark:bg-muted mx-auto my-4 h-1.5 w-14 rounded-full pb-1.5 data-vaul-handle:h-1.5 data-vaul-handle:w-14 data-vaul-handle:pb-1.5',
                 dragHandleClassName,
               )}
             />
