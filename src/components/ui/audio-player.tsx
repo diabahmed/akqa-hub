@@ -291,7 +291,7 @@ export const AudioPlayerProgress = ({
         otherProps.onPointerUp?.(e);
       }}
       className={cn(
-        'group/player relative flex h-4 touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
+        'group/player relative flex h-4 touch-none items-center select-none data-disabled:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
         otherProps.className,
       )}
       onKeyDown={e => {

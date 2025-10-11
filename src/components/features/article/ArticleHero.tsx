@@ -5,13 +5,14 @@ import {
   useContentfulLiveUpdates,
 } from '@contentful/live-preview/react';
 import { useTranslation } from 'react-i18next';
-import { twMerge } from 'tailwind-merge';
 
 import { ArticleAuthor } from '@src/components/features/article/ArticleAuthor';
 import { ArticleLabel } from '@src/components/features/article/ArticleLabel';
 import { CtfImage } from '@src/components/features/contentful';
 import { FormatDate } from '@src/components/shared/format-date';
+import { Card } from '@src/components/ui/card';
 import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
+import { cn } from '@src/lib/utils';
 
 interface ArticleHeroProps {
   article: PageBlogPostFieldsFragment;
@@ -30,9 +31,9 @@ export const ArticleHero = ({
   const { title, shortDescription, publishedDate } = useContentfulLiveUpdates(article);
 
   return (
-    <div
-      className={twMerge(
-        `flex flex-col overflow-hidden rounded-2xl border border-gray300 shadow-lg`,
+    <Card
+      className={cn(
+        `border-gray300 flex flex-col gap-0 overflow-hidden rounded-2xl border py-0 shadow-lg`,
         isReversedLayout ? 'lg:flex-row-reverse' : 'lg:flex-row',
       )}
     >
@@ -45,12 +46,12 @@ export const ArticleHero = ({
         )}
       </div>
 
-      <div className="relative flex flex-1 basis-1/2 flex-col justify-center py-6 px-4 lg:px-16 lg:py-12 xl:px-24">
+      <div className="relative flex flex-1 basis-1/2 flex-col justify-center px-4 py-6 lg:px-16 lg:py-12 xl:px-24">
         <div className="mb-2 flex flex-wrap items-center">
           <ArticleAuthor article={article} />
           {isFeatured && (
             <ArticleLabel
-              className={twMerge(
+              className={cn(
                 'ml-auto pl-2 lg:absolute lg:top-8 xl:top-12',
                 isReversedLayout ? 'lg:left-6 xl:left-12' : 'lg:right-6 xl:right-12',
               )}
@@ -59,8 +60,8 @@ export const ArticleHero = ({
             </ArticleLabel>
           )}
           <div
-            className={twMerge(
-              'ml-auto hidden pl-2 text-xs text-gray600',
+            className={cn(
+              'text-gray600 ml-auto hidden pl-2 text-xs',
               isReversedLayout ? 'lg:block' : '',
             )}
             {...inspectorProps({ fieldId: 'publishedDate' })}
@@ -75,12 +76,12 @@ export const ArticleHero = ({
           </p>
         )}
         <div
-          className={twMerge('mt-2 text-xs text-gray600', isReversedLayout ? 'lg:hidden' : '')}
+          className={cn('text-gray600 mt-2 text-xs', isReversedLayout ? 'lg:hidden' : '')}
           {...inspectorProps({ fieldId: 'publishedDate' })}
         >
           <FormatDate date={publishedDate} />
         </div>
       </div>
-    </div>
+    </Card>
   );
 };

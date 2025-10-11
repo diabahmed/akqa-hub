@@ -6,6 +6,7 @@ import {
 } from '@contentful/live-preview/react';
 
 import { CtfImage } from '@src/components/features/contentful';
+import { Avatar } from '@src/components/ui/avatar';
 import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
 
 interface ArticleAuthorProps {
@@ -18,8 +19,8 @@ export const ArticleAuthor = ({ article }: ArticleAuthorProps) => {
 
   return (
     <div className="flex items-center">
-      <div
-        className="mr-2 overflow-hidden rounded-full border border-blue500"
+      <Avatar
+        className="border-blue500 mr-2 size-7 border"
         {...inspectorProps({ fieldId: 'avatar' })}
       >
         {author?.avatar && (
@@ -33,8 +34,8 @@ export const ArticleAuthor = ({ article }: ArticleAuthorProps) => {
             {...author.avatar}
           />
         )}
-      </div>
-      <span className="text-xs leading-none text-gray600" {...inspectorProps({ fieldId: 'name' })}>
+      </Avatar>
+      <span className="text-gray600 text-xs leading-none" {...inspectorProps({ fieldId: 'name' })}>
         {author?.name}
       </span>
     </div>

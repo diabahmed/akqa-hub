@@ -1,30 +1,44 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
+import { useTheme } from 'next-themes';
+import Balancer from 'react-wrap-balancer';
 
-import { Container } from '@src/components/shared/container';
+import { Section, Container } from '../../ui/crafts';
 
 export const Footer = () => {
-  const { t } = useTranslation();
+  const { resolvedTheme } = useTheme();
+  const logoSrc = resolvedTheme === 'dark' ? '/assets/svg/logo.svg' : '/assets/svg/logo-dark.svg';
 
   return (
-    <footer className="border-t-color mt-10 border-t border-gray200">
-      <Container className="py-8">
-        <h2 className="h4 mb-4">{t('footer.aboutUs')}</h2>
-        <div className="max-w-4xl">{t('footer.description')}</div>
-        <div className="mt-8">
-          {t('footer.powerBy')}{' '}
-          <Link
-            href="https://www.contentful.com"
-            rel="noopener noreferrer"
-            target="_blank"
-            className="text-blue500"
-          >
-            Contentful
-          </Link>
-        </div>
-      </Container>
+    <footer className="not-prose border-t">
+      <Section className="bg-background">
+        <Container className="grid gap-6">
+          <div className="grid gap-6">
+            <Link href="/">
+              <h3 className="sr-only">diabahmed/akqa-hub</h3>
+              <Image
+                src={logoSrc}
+                alt="Logo"
+                width={60}
+                height={60}
+                className="transition-all hover:opacity-75"
+              />
+            </Link>
+            <p>
+              <Balancer>
+                diabahmed/akqa-hub is a collection of Next.js, React, Typescript components for
+                building landing pages and websites.
+              </Balancer>
+            </p>
+            <p className="text-muted-foreground">
+              © <a href="https://github.com/diabahmed">diabahmed/akqa-hub</a>. all rights reserved.
+              2025.
+            </p>
+          </div>
+        </Container>
+      </Section>
     </footer>
   );
 };

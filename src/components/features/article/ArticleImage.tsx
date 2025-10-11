@@ -1,10 +1,10 @@
 'use client';
 
 import { useContentfulInspectorMode } from '@contentful/live-preview/react';
-import { twMerge } from 'tailwind-merge';
 
 import { CtfImage } from '@src/components/features/contentful';
 import { ComponentRichImage } from '@src/lib/__generated/sdk';
+import { cn } from '@src/lib/utils';
 
 interface ArticleImageProps {
   image: ComponentRichImage;
@@ -17,7 +17,7 @@ export const ArticleImage = ({ image }: ArticleImageProps) => {
       <div className="flex justify-center" {...inspectorProps({ fieldId: 'image' })}>
         <CtfImage
           nextImageProps={{
-            className: twMerge(
+            className: cn(
               'mt-0 mb-0 ',
               image.fullWidth
                 ? 'md:w-screen md:max-w-[calc(100vw-40px)] md:shrink-0'

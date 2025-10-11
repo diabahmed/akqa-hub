@@ -1,6 +1,15 @@
 import { HTMLProps } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@src/lib/utils';
 
 export const Container = ({ className, ...props }: HTMLProps<HTMLDivElement>) => {
-  return <div className={twMerge('mx-auto max-w-8xl px-4', className)} {...props} />;
+  return (
+    <div
+      className={cn(
+        'mx-auto min-h-[calc(100vh-var(--header-height,100px)-var(--footer-height,260px))] max-w-4xl space-y-12 py-12',
+        className,
+      )}
+      {...props}
+    />
+  );
 };

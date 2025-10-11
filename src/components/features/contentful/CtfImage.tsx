@@ -1,7 +1,7 @@
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
-import { twMerge } from 'tailwind-merge';
 
 import { ImageFieldsFragment } from '@src/lib/__generated/sdk';
+import { cn } from '@src/lib/utils';
 
 interface ImageProps extends Omit<ImageFieldsFragment, '__typename'> {
   nextImageProps?: Omit<NextImageProps, 'src' | 'alt'>;
@@ -23,7 +23,7 @@ export const CtfImage = ({ url, width, height, title, nextImageProps }: ImagePro
       placeholder="blur"
       blurDataURL={blurURL.toString()}
       {...nextImageProps}
-      className={twMerge(nextImageProps?.className, 'transition-all')}
+      className={cn(nextImageProps?.className, 'transition-all')}
     />
   );
 };

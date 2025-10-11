@@ -5,7 +5,6 @@ import { SyntheticEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { LanguageSelectorDesktop } from '@src/components/features/language-selector/LanguageSelectorDesktop';
-import { LanguageSelectorMobile } from '@src/components/features/language-selector/LanguageSelectorMobile';
 import i18nConfig, { locales } from '@src/i18n/config';
 
 const localeName = locale => locale.split('-')[0];
@@ -49,24 +48,12 @@ export const LanguageSelector = () => {
   };
 
   return locales && locales.length > 1 ? (
-    <>
-      <div className="hidden md:block">
-        <LanguageSelectorDesktop
-          displayName={displayName}
-          onChange={handleLocaleChange}
-          localeName={localeName}
-          currentLocale={currentLocale}
-          currentPathname={currentPathname}
-        />
-      </div>
-
-      <div className="block md:hidden">
-        <LanguageSelectorMobile
-          displayName={displayName}
-          onChange={handleLocaleChange}
-          localeName={localeName}
-        />
-      </div>
-    </>
+    <LanguageSelectorDesktop
+      displayName={displayName}
+      onChange={handleLocaleChange}
+      localeName={localeName}
+      currentLocale={currentLocale}
+      currentPathname={currentPathname}
+    />
   ) : null;
 };

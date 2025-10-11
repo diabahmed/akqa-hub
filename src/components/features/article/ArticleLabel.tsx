@@ -1,5 +1,7 @@
 import { HTMLProps, ReactNode } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { Badge } from '@src/components/ui/badge';
+import { cn } from '@src/lib/utils';
 
 interface ArticleLabelProps extends HTMLProps<HTMLSpanElement> {
   children: ReactNode;
@@ -7,14 +9,14 @@ interface ArticleLabelProps extends HTMLProps<HTMLSpanElement> {
 
 export const ArticleLabel = ({ children, className, ...props }: ArticleLabelProps) => {
   return (
-    <span
-      className={twMerge(
+    <Badge
+      className={cn(
         'bg-purple200 text-2xs text-purple600 rounded-sm px-2 py-1 leading-none font-semibold tracking-widest uppercase',
         className,
       )}
       {...props}
     >
       {children}
-    </span>
+    </Badge>
   );
 };

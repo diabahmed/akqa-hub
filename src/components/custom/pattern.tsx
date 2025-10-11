@@ -135,7 +135,7 @@ const Pattern = () => {
     <div className="flex h-[320px] min-w-[640px] items-center justify-center overflow-hidden">
       <div
         ref={containerRef}
-        className="grid grid-cols-[repeat(24,minmax(0,1fr))] gap-5"
+        className="grid grid-cols-24 gap-5"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
