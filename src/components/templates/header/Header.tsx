@@ -23,8 +23,8 @@ export const Header = () => {
     }
   });
 
-  // Use resolvedTheme if available, fall back to theme, default to 'dark' for safety
-  const currentTheme = resolvedTheme || theme || 'dark';
+  // Use resolvedTheme if available, fall back to theme, default to 'light' for safety
+  const currentTheme = resolvedTheme || theme || 'light';
   const logoSrc = currentTheme === 'dark' ? '/assets/svg/logo.svg' : '/assets/svg/logo-dark.svg';
 
   return (
