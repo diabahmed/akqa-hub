@@ -57,8 +57,11 @@ export const Footer = () => {
               </Balancer>
             </p>
             <p className="text-muted-foreground">
-              © <a href="https://github.com/diabahmed">akqa-hub</a>. all rights reserved 2025.
-              Music by{' '}
+              ©{' '}
+              <a href="https://github.com/diabahmed" target="_blank" rel="noopener noreferrer">
+                diabahmed
+              </a>
+              . all rights reserved 2025. Music by{' '}
               <Link001
                 href="https://www.hammockmusic.com/columbus-soundtrack"
                 className="inline-flex font-serif font-extralight italic"
