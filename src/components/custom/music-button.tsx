@@ -3,7 +3,7 @@
 import { motion } from 'motion/react';
 import React, { useEffect, useState } from 'react';
 
-import { useAudioPlayer } from '@src/hooks/use-audio-player';
+import { useAudio } from '@src/contexts/audio-context';
 
 export const MusicToggleButton = () => {
   const bars = 5;
@@ -14,12 +14,7 @@ export const MusicToggleButton = () => {
 
   const [heights, setHeights] = useState(getRandomHeights());
 
-  const { isPlaying, play, pause } = useAudioPlayer({
-    src: '/assets/audio/Weese.flac',
-    loop: true,
-    autoplay: true,
-    volume: 0.75,
-  });
+  const { isPlaying, play, pause } = useAudio();
 
   useEffect(() => {
     if (isPlaying) {
