@@ -70,6 +70,10 @@ export default withPlugins(plugins, {
       },
       {
         protocol: 'https',
+        hostname: 'downloads.ctfassets.net',
+      },
+      {
+        protocol: 'https',
         hostname: 'raw.githubusercontent.com',
       },
     ],
