@@ -6,7 +6,8 @@
   // Code actions on save
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "never"
+    "source.organizeImports": "explicit",
+    "source.removeUnusedImports": "explicit"
   },
 
   // ESLint settings
