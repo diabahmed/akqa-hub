@@ -15,11 +15,11 @@ export default function TypographyDemoPage() {
       {/* Hero Header */}
       <div className="space-y-6 pb-8">
         <div className="space-y-2">
-          <p className="font-body text-primary text-sm font-semibold tracking-wider uppercase">
+          <p className="font-body text-primary mb-4 text-sm font-semibold tracking-wider uppercase">
             Design System
           </p>
           <h1 className="font-heading text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Typography System
+            Typography
           </h1>
           <p className="font-body text-muted-foreground text-xl md:text-2xl">
             A comprehensive guide to fonts, weights, and typography patterns used throughout the
