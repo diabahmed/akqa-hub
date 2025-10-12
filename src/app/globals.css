@@ -1,10 +1,13 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
 
 /* -----------------------------------------------------------------------------
    Design tokens (semantic HSL values) + dark mode overrides
 ----------------------------------------------------------------------------- */
 :root {
-  --background: 0 0% 100%;
+  --background: 0 0% 97.6%;
   --foreground: 0 0% 3.9%;
 
   --card: 0 0% 100%;
@@ -424,5 +427,14 @@ body {
   .display-text {
     font-family: var(--font-display);
     @apply text-5xl font-normal md:text-6xl lg:text-7xl;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
