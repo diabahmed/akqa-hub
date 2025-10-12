@@ -19,9 +19,7 @@ export const ArticleImage = ({ image }: ArticleImageProps) => {
           nextImageProps={{
             className: cn(
               'w-full',
-              image.fullWidth
-                ? 'md:w-screen md:max-w-[calc(100vw-40px)] md:shrink-0'
-                : 'rounded-lg',
+              image.fullWidth ? 'md:w-screen md:max-w-[calc(100vw-40px)] md:shrink-0' : '',
             ),
           }}
           {...image.image}
