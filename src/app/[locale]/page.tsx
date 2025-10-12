@@ -1,7 +1,9 @@
+import { GrainGradient } from '@paper-design/shaders-react';
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import Balancer from 'react-wrap-balancer';
 
 import { ArticleHero, ArticleTileGrid } from '@src/components/features/article';
 import { Container } from '@src/components/shared/container';
@@ -101,6 +103,70 @@ export default async function Page({ params }: LandingPageProps) {
             </div>
           </div>
           <ArticleTileGrid className="md:grid-cols-2 lg:grid-cols-3" articles={posts} />
+        </section>
+
+        {/* Quote Section */}
+        <section className="fade-in-3">
+          <div className="relative overflow-hidden rounded-lg border p-8 shadow-sm md:p-12 lg:p-16">
+            {/* Shader Background */}
+            <div className="absolute inset-0">
+              <GrainGradient
+                width={1280}
+                height={720}
+                colors={['#000000', '#ffffff']}
+                colorBack="#000000"
+                softness={0.75}
+                intensity={0.15}
+                noise={0.5}
+                shape="wave"
+                speed={1.7}
+                rotation={28}
+                offsetY={0.25}
+              />
+            </div>
+
+            <div className="relative z-10 mx-auto max-w-3xl text-center">
+              <p className="mb-6 font-serif text-xs font-semibold tracking-widest text-white/60 uppercase">
+                The larger picture
+              </p>
+              <blockquote className="font-heading text-3xl leading-tight font-light text-white md:text-4xl lg:text-5xl">
+                <Balancer>
+                  &ldquo;In a world of scarcity, we treasure{' '}
+                  <span className="text-white">tools</span>.
+                  <br />
+                  In a world of abundance, we treasure{' '}
+                  <span className="font-extralight text-white italic">taste</span>&rdquo;
+                </Balancer>
+              </blockquote>
+              <footer className="mt-8 flex flex-col items-center gap-4">
+                <div className="space-y-1 text-center">
+                  <p className="font-body text-sm font-semibold text-white">Anu Atluru</p>
+                  <Link
+                    href="https://www.workingtheorys.com/p/taste-is-eating-silicon-valley"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body inline-flex items-center gap-1 text-sm text-white/70 transition-colors hover:text-white"
+                  >
+                    The Working Theory
+                    <svg
+                      className="h-3 w-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </Link>
+                </div>
+              </footer>
+            </div>
+          </div>
         </section>
       </Container>
     </TranslationsProvider>

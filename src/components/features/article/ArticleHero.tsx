@@ -124,7 +124,7 @@ export const ArticleHero = ({
         </div>
 
         <h2
-          className="font-heading mb-3 text-2xl font-bold md:text-3xl lg:text-4xl"
+          className="font-heading mb-3 text-2xl font-light md:text-3xl lg:text-4xl"
           {...inspectorProps({ fieldId: 'title' })}
         >
           {title}

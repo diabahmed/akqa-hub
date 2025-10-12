@@ -374,8 +374,6 @@ export default function TypographyDemoPage() {
 
         <div className="border-border my-12 border-t" />
 
-        <div className="border-border my-12 border-t" />
-
         {/* Complete Example */}
         <section className="space-y-6">
           <div className="space-y-2">

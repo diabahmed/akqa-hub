@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Balancer from 'react-wrap-balancer';
 
-import { Section, Container } from '../../ui/crafts';
+import { Container, Section } from '../../ui/crafts';
 
 import { Link001 } from '@src/components/custom/link';
 import DottedGlowBackground from '@src/components/ui/dotted-glow-background';
@@ -105,20 +105,22 @@ export const Footer = () => {
               </Balancer>
             </div>
             <p className="text-muted-foreground">
-              © 2025{' '}
-              <a href="https://github.com/diabahmed" target="_blank" rel="noopener noreferrer">
-                diabahmed/akqa-hub
-              </a>
-              . all rights reserved.{' '}
-              <span className="text-s">
-                music by{' '}
-                <Link001
-                  href="https://www.hammockmusic.com/columbus-soundtrack"
-                  className="font-heading inline-flex font-extralight italic"
-                >
-                  Hammock
-                </Link001>
-              </span>
+              <Balancer>
+                © 2025{' '}
+                <a href="https://github.com/diabahmed" target="_blank" rel="noopener noreferrer">
+                  diabahmed/akqa-hub
+                </a>
+                . all rights reserved.{' '}
+                <span className="text-s">
+                  music by{' '}
+                  <Link001
+                    href="https://www.hammockmusic.com/columbus-soundtrack"
+                    className="font-heading inline-flex font-extralight italic"
+                  >
+                    Hammock
+                  </Link001>
+                </span>
+              </Balancer>
             </p>
           </div>
         </Container>
