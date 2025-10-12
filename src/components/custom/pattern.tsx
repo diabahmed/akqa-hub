@@ -132,10 +132,10 @@ const Pattern = () => {
   };
 
   return (
-    <div className="flex h-[320px] min-w-[640px] items-center justify-center overflow-hidden">
+    <div className="flex w-full items-center justify-center overflow-hidden py-12 md:py-16 lg:py-20">
       <div
         ref={containerRef}
-        className="grid grid-cols-24 gap-5"
+        className="grid grid-cols-12 gap-3 sm:grid-cols-16 sm:gap-4 md:grid-cols-20 md:gap-5 lg:grid-cols-24 lg:gap-6"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
