@@ -137,6 +137,11 @@
 }
 
 /* -----------------------------------------------------------------------------
+   Dark mode variant configuration
+----------------------------------------------------------------------------- */
+@variant dark (.dark &);
+
+/* -----------------------------------------------------------------------------
    Base glue: apply semantic tokens via Tailwind utilities
 ----------------------------------------------------------------------------- */
 *,
@@ -205,6 +210,35 @@ body {
   animation: fade-in-up 1000ms cubic-bezier(0.39, 0.575, 0.565, 1) 200ms both;
 }
 
+@utility fade-in-slow {
+  animation: fade-in-up 600ms cubic-bezier(0.4, 0, 0.2, 1) 100ms both;
+}
+
+/* Staggered fade-in animations */
+@utility fade-in-1 {
+  animation: fade-in-up 600ms cubic-bezier(0.4, 0, 0.2, 1) 0ms both;
+}
+
+@utility fade-in-2 {
+  animation: fade-in-up 600ms cubic-bezier(0.4, 0, 0.2, 1) 200ms both;
+}
+
+@utility fade-in-3 {
+  animation: fade-in-up 600ms cubic-bezier(0.4, 0, 0.2, 1) 300ms both;
+}
+
+@utility fade-in-4 {
+  animation: fade-in-up 600ms cubic-bezier(0.4, 0, 0.2, 1) 400ms both;
+}
+
+@utility fade-in-5 {
+  animation: fade-in-up 600ms cubic-bezier(0.4, 0, 0.2, 1) 500ms both;
+}
+
+@utility fade-in-6 {
+  animation: fade-in-up 600ms cubic-bezier(0.4, 0, 0.2, 1) 600ms both;
+}
+
 /* -----------------------------------------------------------------------------
    Typography Utilities - Font Family Classes
 ----------------------------------------------------------------------------- */
@@ -256,35 +290,121 @@ body {
 
   /* Blog post content paragraphs */
   .blog-content p {
-    @apply mb-4;
+    @apply mb-6;
   }
 
   /* Blog post headings within content */
+  .blog-content h1 {
+    font-family: var(--font-heading);
+    @apply mt-10 mb-6 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl;
+  }
+
   .blog-content h2 {
     font-family: var(--font-heading);
-    @apply mt-8 mb-4 text-3xl font-bold md:text-4xl;
+    @apply mt-8 mb-4 text-3xl leading-tight font-bold md:text-4xl;
   }
 
   .blog-content h3 {
     font-family: var(--font-heading);
-    @apply mt-6 mb-3 text-2xl font-semibold md:text-3xl;
+    @apply mt-6 mb-3 text-2xl leading-snug font-semibold md:text-3xl;
   }
 
   .blog-content h4 {
     font-family: var(--font-heading);
-    @apply mt-4 mb-2 text-xl font-semibold md:text-2xl;
+    @apply mt-4 mb-2 text-xl leading-snug font-semibold md:text-2xl;
+  }
+
+  .blog-content h5 {
+    font-family: var(--font-heading);
+    @apply mt-4 mb-2 text-lg font-semibold md:text-xl;
+  }
+
+  .blog-content h6 {
+    font-family: var(--font-heading);
+    @apply mt-4 mb-2 text-base font-semibold md:text-lg;
+  }
+
+  /* Lists */
+  .blog-content ul,
+  .blog-content ol {
+    @apply mb-6 ml-6;
+  }
+
+  .blog-content ul {
+    @apply list-disc;
+  }
+
+  .blog-content ol {
+    @apply list-decimal;
+  }
+
+  .blog-content li {
+    @apply mb-2;
+  }
+
+  .blog-content li > p {
+    @apply mb-2;
+  }
+
+  /* Links */
+  .blog-content a {
+    @apply text-primary decoration-primary/30 hover:decoration-primary underline underline-offset-2 transition-colors;
+  }
+
+  /* Blockquotes */
+  .blog-content blockquote {
+    @apply border-primary text-muted-foreground my-6 border-l-4 pl-6 italic;
+  }
+
+  .blog-content blockquote p {
+    @apply mb-4;
+  }
+
+  /* Code blocks and inline code */
+  .blog-content pre {
+    font-family: var(--font-mono);
+    @apply bg-muted my-6 overflow-x-auto rounded-lg p-4 text-sm;
+  }
+
+  .blog-content code {
+    font-family: var(--font-mono);
+    @apply bg-muted rounded px-1.5 py-0.5 text-sm;
+  }
+
+  .blog-content pre code {
+    @apply bg-transparent p-0;
+  }
+
+  /* Horizontal rule */
+  .blog-content hr {
+    @apply border-border my-8;
+  }
+
+  /* Tables */
+  .blog-content table {
+    @apply my-6 w-full border-collapse;
+  }
+
+  .blog-content th {
+    @apply border-border bg-muted border px-4 py-2 text-left font-semibold;
+  }
+
+  .blog-content td {
+    @apply border-border border px-4 py-2;
+  }
+
+  /* Strong and emphasis */
+  .blog-content strong {
+    @apply font-bold;
+  }
+
+  .blog-content em {
+    @apply italic;
   }
 
   /* Display text - for hero sections */
   .display-text {
     font-family: var(--font-display);
     @apply text-5xl font-normal md:text-6xl lg:text-7xl;
-  }
-
-  /* Code blocks in blog posts */
-  .blog-content pre,
-  .blog-content code {
-    font-family: var(--font-mono);
-    @apply text-sm;
   }
 }
