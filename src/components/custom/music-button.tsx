@@ -39,44 +39,56 @@ export const MusicToggleButton = () => {
   };
 
   return (
-    <>
+    <motion.button
+      onClick={handleClick}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
+      key="audio"
+      initial={{ padding: '14px 14px ' }}
+      whileHover={{ padding: '18px 22px ' }}
+      whileTap={{ padding: '18px 22px ' }}
+      transition={{ duration: 1, bounce: 0.6, type: 'spring' }}
+      className="border-foreground bg-background/80 supports-[backdrop-filter]:bg-background/80 focus:ring-primary cursor-pointer rounded-full border p-2 focus:ring-2 focus:ring-offset-2 focus:outline-none"
+      type="button"
+      aria-label={isPlaying ? 'Pause background music' : 'Play background music'}
+      aria-pressed={isPlaying}
+      title={isPlaying ? 'Pause background music' : 'Play background music'}
+    >
       <motion.div
-        onClick={handleClick}
-        key="audio"
-        initial={{ padding: '14px 14px ' }}
-        whileHover={{ padding: '18px 22px ' }}
-        whileTap={{ padding: '18px 22px ' }}
-        transition={{ duration: 1, bounce: 0.6, type: 'spring' }}
-        className="border-foreground bg-background/80 supports-[backdrop-filter]:bg-background/80 cursor-pointer rounded-full border p-2"
+        initial={{ opacity: 0, filter: 'blur(4px)' }}
+        animate={{
+          opacity: 1,
+          filter: 'blur(0px)',
+        }}
+        exit={{ opacity: 0, filter: 'blur(4px)' }}
+        transition={{ type: 'spring', bounce: 0.35 }}
+        className="flex h-[18px] w-full items-center gap-1 rounded-full"
+        aria-hidden="true"
       >
-        <motion.div
-          initial={{ opacity: 0, filter: 'blur(4px)' }}
-          animate={{
-            opacity: 1,
-            filter: 'blur(0px)',
-          }}
-          exit={{ opacity: 0, filter: 'blur(4px)' }}
-          transition={{ type: 'spring', bounce: 0.35 }}
-          className="flex h-[18px] w-full items-center gap-1 rounded-full"
-        >
-          {/* Waveform visualization */}
-          {heights.map((height, index) => (
-            <motion.div
-              key={index}
-              className="bg-foreground w-px rounded-full"
-              initial={{ height: 1 }}
-              animate={{
-                height: Math.max(4, height * 14),
-              }}
-              transition={{
-                type: 'spring',
-                stiffness: 300,
-                damping: 10,
-              }}
-            />
-          ))}
-        </motion.div>
+        {/* Waveform visualization */}
+        {heights.map((height, index) => (
+          <motion.div
+            key={index}
+            className="bg-foreground w-px rounded-full"
+            initial={{ height: 1 }}
+            animate={{
+              height: Math.max(4, height * 14),
+            }}
+            transition={{
+              type: 'spring',
+              stiffness: 300,
+              damping: 10,
+            }}
+          />
+        ))}
       </motion.div>
-    </>
+      <span className="sr-only">
+        {isPlaying ? 'Music is currently playing' : 'Music is currently paused'}
+      </span>
+    </motion.button>
   );
 };
