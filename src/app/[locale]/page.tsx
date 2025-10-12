@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { ArticleHero, ArticleTileGrid } from '@src/components/features/article';
 import { Container } from '@src/components/shared/container';
 import TranslationsProvider from '@src/components/shared/i18n/TranslationProvider';
+import { SpinningText } from '@src/components/ui/spinning-text';
 import initTranslations from '@src/i18n';
 import { defaultLocale, locales } from '@src/i18n/config';
 import { PageBlogPostOrder } from '@src/lib/__generated/sdk';
@@ -75,14 +76,32 @@ export default async function Page({ params }: LandingPageProps) {
 
   return (
     <TranslationsProvider locale={locale} resources={resources}>
-      <Container>
-        <Link href={`/${page.featuredBlogPost.slug}`}>
-          <ArticleHero article={page.featuredBlogPost} />
-        </Link>
-      </Container>
-      <Container>
-        <h2 className="mb-4 md:mb-6">{t('landingPage.latestArticles')}</h2>
-        <ArticleTileGrid className="md:grid-cols-2 lg:grid-cols-3" articles={posts} />
+      <Container className="space-y-12">
+        {/* Featured Article */}
+        <section className="fade-in-1">
+          <Link href={`/${page.featuredBlogPost.slug}`}>
+            <ArticleHero article={page.featuredBlogPost} isFeatured variant="card" />
+          </Link>
+        </section>
+
+        {/* Latest Articles */}
+        <section className="fade-in-2">
+          <div className="mb-8 flex items-center gap-0.5">
+            <SpinningText
+              radius={3.5}
+              duration={15}
+              className="text-primary h-20 w-20 shrink-0 font-serif text-[10px] font-semibold tracking-widest"
+            >
+              • NEW • LATEST • FRESH
+            </SpinningText>
+            <div>
+              <h2 className="font-heading text-2xl font-bold md:text-3xl">
+                {t('landingPage.latestArticles')}
+              </h2>
+            </div>
+          </div>
+          <ArticleTileGrid className="md:grid-cols-2 lg:grid-cols-3" articles={posts} />
+        </section>
       </Container>
     </TranslationsProvider>
   );
