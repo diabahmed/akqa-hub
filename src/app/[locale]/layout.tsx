@@ -64,7 +64,7 @@ export default async function PageLayout({ children, params }: LayoutProps) {
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
       </head>
 
-      <body className="px-4 xl:px-0">
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -79,8 +79,10 @@ export default async function PageLayout({ children, params }: LayoutProps) {
               targetOrigin={allowedOriginList}
             >
               <main className="font-body">
-                <Header />
-                {children}
+                <div className="px-4 xl:px-0">
+                  <Header />
+                  {children}
+                </div>
                 <Footer />
                 <Toaster position="top-center" closeButton richColors />
                 <Background />
