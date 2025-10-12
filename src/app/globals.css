@@ -162,6 +162,24 @@ body {
 }
 
 /* -----------------------------------------------------------------------------
+   View Transition API styles for theme toggle animation
+----------------------------------------------------------------------------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Always put the new layer on top so the circle reveal animation is visible */
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* -----------------------------------------------------------------------------
    Custom utilities (v4 style)
 ----------------------------------------------------------------------------- */
 @utility no-scrollbar {
