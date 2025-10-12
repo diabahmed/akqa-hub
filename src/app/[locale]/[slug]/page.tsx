@@ -6,6 +6,7 @@ import Pattern from '@src/components/custom/pattern';
 import { ArticleContent, ArticleHero } from '@src/components/features/article';
 import { Container } from '@src/components/shared/container';
 import { BlurFade } from '@src/components/ui/blur-fade';
+import { Separator } from '@src/components/ui/separator';
 import { defaultLocale, locales } from '@src/i18n/config';
 import { client, previewClient } from '@src/lib/client';
 
@@ -87,8 +88,9 @@ export default async function Page({ params }: BlogPageProps) {
   return (
     <>
       <BlurFade delay={0.25} inView direction="up">
-        <Container className="max-w-4xl">
+        <Container className="max-w-4xl pb-0">
           <ArticleHero article={blogPost} isFeatured={isFeatured} variant="flat" />
+          <Separator size="md" className="mb-3.5" />
         </Container>
       </BlurFade>
       <BlurFade delay={0.25} inView direction="up">
