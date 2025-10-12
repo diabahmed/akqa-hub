@@ -89,7 +89,7 @@ export default async function Page({ params }: LandingPageProps) {
           <div className="mb-8 flex items-center gap-0.5">
             <SpinningText
               radius={3.5}
-              duration={15}
+              duration={10}
               className="text-primary h-20 w-20 shrink-0 font-serif text-[10px] font-semibold tracking-widest"
             >
               • NEW • LATEST • FRESH

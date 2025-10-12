@@ -33,7 +33,7 @@ export function generateMetadata(): Metadata {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff',
+  themeColor: '#f9f9f9',
 };
 
 export async function generateStaticParams(): Promise<{ locale: string }[]> {

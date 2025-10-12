@@ -8,6 +8,7 @@ import { Section, Container } from '../../ui/crafts';
 
 import { Link001 } from '@src/components/custom/link';
 import DottedGlowBackground from '@src/components/ui/dotted-glow-background';
+import { TextLoop } from '@src/components/ui/text-loop';
 
 export const Footer = () => {
   return (
@@ -50,24 +51,74 @@ export const Footer = () => {
                 suppressHydrationWarning
               />
             </Link>
-            <p>
+            <div>
               <Balancer>
-                akqa-hub is a space where stories meet intelligence. curated content, thoughtful
-                recommendations, conversations that matter.
+                a space where stories meet intelligence. curated content, thoughtful
+                recommendations, conversations that{' '}
+                <TextLoop
+                  className="inline-flex overflow-y-clip"
+                  interval={3}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 900,
+                    damping: 80,
+                    mass: 10,
+                  }}
+                  variants={{
+                    initial: {
+                      y: 20,
+                      rotateX: 90,
+                      opacity: 0,
+                      filter: 'blur(4px)',
+                    },
+                    animate: {
+                      y: 0,
+                      rotateX: 0,
+                      opacity: 1,
+                      filter: 'blur(0px)',
+                    },
+                    exit: {
+                      y: -20,
+                      rotateX: -90,
+                      opacity: 0,
+                      filter: 'blur(4px)',
+                    },
+                  }}
+                >
+                  <span>matter</span>
+                  <span>inspire</span>
+                  <span>resonate</span>
+                  <span>connect</span>
+                  <span>transform</span>
+                  <span>enlighten</span>
+                  <span>challenge</span>
+                  <span>provoke</span>
+                  <span>illuminate</span>
+                  <span>cultivate</span>
+                  <span>transcend</span>
+                  <span>evolve</span>
+                  <span>amplify</span>
+                  <span>catalyze</span>
+                  <span>captivate</span>
+                </TextLoop>
+                .
               </Balancer>
-            </p>
+            </div>
             <p className="text-muted-foreground">
-              ©{' '}
+              © 2025{' '}
               <a href="https://github.com/diabahmed" target="_blank" rel="noopener noreferrer">
-                diabahmed
+                diabahmed/akqa-hub
               </a>
-              . all rights reserved 2025. music by{' '}
-              <Link001
-                href="https://www.hammockmusic.com/columbus-soundtrack"
-                className="inline-flex font-serif font-extralight italic"
-              >
-                Hammock
-              </Link001>
+              . all rights reserved.{' '}
+              <span className="text-s">
+                music by{' '}
+                <Link001
+                  href="https://www.hammockmusic.com/columbus-soundtrack"
+                  className="font-heading inline-flex font-extralight italic"
+                >
+                  Hammock
+                </Link001>
+              </span>
             </p>
           </div>
         </Container>

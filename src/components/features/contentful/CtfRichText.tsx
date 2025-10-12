@@ -43,5 +43,5 @@ export const contentfulBaseRichTextOptions = ({ links }: ContentfulRichTextInter
 export const CtfRichText = ({ json, links }: ContentfulRichTextInterface) => {
   const baseOptions = contentfulBaseRichTextOptions({ links, json });
 
-  return <article>{documentToReactComponents(json, baseOptions)}</article>;
+  return <>{documentToReactComponents(json, baseOptions)}</>;
 };

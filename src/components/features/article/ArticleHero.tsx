@@ -9,6 +9,7 @@ import { ArticleAuthor } from '@src/components/features/article/ArticleAuthor';
 import { CtfImage } from '@src/components/features/contentful';
 import { ContentCard } from '@src/components/shared/content-card';
 import { FormatDate } from '@src/components/shared/format-date';
+import { Tilt } from '@src/components/ui/tilt';
 import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
 import { cn } from '@src/lib/utils';
 
@@ -22,6 +23,7 @@ interface ArticleHeroProps {
 
 export const ArticleHero = ({
   article,
+  isFeatured = false,
   isReversedLayout = false,
   variant = 'card',
 }: ArticleHeroProps) => {
@@ -82,7 +84,7 @@ export const ArticleHero = ({
   }
 
   // Card variant for main page (blog selection)
-  return (
+  const cardContent = (
     <ContentCard
       withPadding={false}
       className={cn(
@@ -146,4 +148,15 @@ export const ArticleHero = ({
       </div>
     </ContentCard>
   );
+
+  // Wrap with Tilt if it's the featured article
+  if (isFeatured) {
+    return (
+      <Tilt rotationFactor={4} isRevese>
+        {cardContent}
+      </Tilt>
+    );
+  }
+
+  return cardContent;
 };
