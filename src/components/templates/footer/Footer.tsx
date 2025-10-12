@@ -14,11 +14,11 @@ export const Footer = () => {
     <footer className="not-prose relative border-t">
       <DottedGlowBackground
         className="pointer-events-none opacity-20 dark:opacity-100"
-        opacity={0.1}
+        opacity={0.2}
         gap={10}
         radius={1.6}
         colorLightVar="--color-neutral-500"
-        glowColorLightVar="--color-neutral-600"
+        glowColorLightVar="--color-neutral-800"
         colorDarkVar="--color-neutral-500"
         glowColorDarkVar="--color-sky-800"
         backgroundOpacity={0}
@@ -52,7 +52,7 @@ export const Footer = () => {
             </Link>
             <p>
               <Balancer>
-                akqa-hub is where stories meet intelligence. Curated content, thoughtful
+                akqa-hub is a space where stories meet intelligence. curated content, thoughtful
                 recommendations, conversations that matter.
               </Balancer>
             </p>
@@ -61,7 +61,7 @@ export const Footer = () => {
               <a href="https://github.com/diabahmed" target="_blank" rel="noopener noreferrer">
                 diabahmed
               </a>
-              . all rights reserved 2025. Music by{' '}
+              . all rights reserved 2025. music by{' '}
               <Link001
                 href="https://www.hammockmusic.com/columbus-soundtrack"
                 className="inline-flex font-serif font-extralight italic"
