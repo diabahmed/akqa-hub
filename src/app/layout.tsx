@@ -1,9 +1,11 @@
 import '@src/app/globals.css';
 
+import { AudioProvider } from '@src/contexts/audio-context';
+
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export default async function RootLayout({ children }: LayoutProps) {
-  return children;
+  return <AudioProvider>{children}</AudioProvider>;
 }
