@@ -3,7 +3,6 @@
 import { motion, useScroll, useMotionValueEvent } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
 import { useState } from 'react';
 
 import { LanguageSelector } from '@src/components/features/language-selector/LanguageSelector';
@@ -11,7 +10,6 @@ import { AnimatedThemeToggler } from '@src/components/ui/animated-theme-toggler'
 
 export const Header = () => {
   const { scrollY } = useScroll();
-  const { resolvedTheme, theme } = useTheme();
   const [hidden, setHidden] = useState(false);
 
   useMotionValueEvent(scrollY, 'change', latest => {
@@ -22,10 +20,6 @@ export const Header = () => {
       setHidden(false);
     }
   });
-
-  // Use resolvedTheme if available, fall back to theme, default to 'light' for safety
-  const currentTheme = resolvedTheme || theme || 'light';
-  const logoSrc = currentTheme === 'dark' ? '/assets/svg/logo.svg' : '/assets/svg/logo-dark.svg';
 
   return (
     <motion.nav
@@ -39,13 +33,24 @@ export const Header = () => {
     >
       <h1 className="ml-2">
         <Link href="/">
-          <h3 className="sr-only">diabahmed/akqa-hub</h3>
+          <h3 className="sr-only">akqa-hub</h3>
+          {/* Light theme logo */}
           <Image
-            src={logoSrc}
+            src="/assets/svg/logo-dark.svg"
             alt="Logo"
             width={40}
             height={40}
-            className="transition-all hover:opacity-75"
+            className="h-8 w-8 transition-all hover:opacity-75 sm:h-10 sm:w-10 dark:hidden"
+            suppressHydrationWarning
+          />
+          {/* Dark theme logo */}
+          <Image
+            src="/assets/svg/logo.svg"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="hidden h-8 w-8 transition-all hover:opacity-75 sm:h-10 sm:w-10 dark:block"
+            suppressHydrationWarning
           />
         </Link>
       </h1>

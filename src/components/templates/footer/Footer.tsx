@@ -2,20 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
 import Balancer from 'react-wrap-balancer';
 
 import { Section, Container } from '../../ui/crafts';
 
+import { Link001 } from '@src/components/custom/link';
 import DottedGlowBackground from '@src/components/ui/dotted-glow-background';
 
 export const Footer = () => {
-  const { resolvedTheme, theme } = useTheme();
-
-  // Use resolvedTheme if available, fall back to theme, default to 'light' for safety
-  const currentTheme = resolvedTheme || theme || 'light';
-  const logoSrc = currentTheme === 'dark' ? '/assets/svg/logo.svg' : '/assets/svg/logo-dark.svg';
-
   return (
     <footer className="not-prose relative border-t">
       <DottedGlowBackground
@@ -36,24 +30,41 @@ export const Footer = () => {
         <Container className="grid gap-6">
           <div className="grid gap-6">
             <Link href="/">
-              <h3 className="sr-only">diabahmed/akqa-hub</h3>
+              <h3 className="sr-only">akqa-hub</h3>
+              {/* Light theme logo */}
               <Image
-                src={logoSrc}
+                src="/assets/svg/logo-dark.svg"
                 alt="Logo"
-                width={40}
-                height={40}
-                className="transition-all hover:opacity-75"
+                width={60}
+                height={60}
+                className="transition-all hover:opacity-75 dark:hidden"
+                suppressHydrationWarning
+              />
+              {/* Dark theme logo */}
+              <Image
+                src="/assets/svg/logo.svg"
+                alt="Logo"
+                width={60}
+                height={60}
+                className="hidden transition-all hover:opacity-75 dark:block"
+                suppressHydrationWarning
               />
             </Link>
             <p>
               <Balancer>
-                diabahmed/akqa-hub is a collection of Next.js, React, Typescript components for
-                building landing pages and websites.
+                akqa-hub is where stories meet intelligence. Curated content, thoughtful
+                recommendations, conversations that matter.
               </Balancer>
             </p>
             <p className="text-muted-foreground">
-              © <a href="https://github.com/diabahmed">diabahmed/akqa-hub</a>. all rights reserved.
-              2025.
+              © <a href="https://github.com/diabahmed">akqa-hub</a>. all rights reserved 2025.
+              Music by{' '}
+              <Link001
+                href="https://www.hammockmusic.com/columbus-soundtrack"
+                className="inline-flex font-serif font-extralight italic"
+              >
+                Hammock
+              </Link001>
             </p>
           </div>
         </Container>
