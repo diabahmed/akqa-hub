@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import Pattern from '@src/components/custom/pattern';
 import { ArticleContent, ArticleHero } from '@src/components/features/article';
 import { Container } from '@src/components/shared/container';
+import { BlurFade } from '@src/components/ui/blur-fade';
 import { defaultLocale, locales } from '@src/i18n/config';
 import { client, previewClient } from '@src/lib/client';
 
@@ -85,13 +86,17 @@ export default async function Page({ params }: BlogPageProps) {
 
   return (
     <>
-      <Container className="max-w-4xl">
-        <ArticleHero article={blogPost} isFeatured={isFeatured} variant="flat" />
-      </Container>
-      <Container className="-pb-2 max-w-4xl pt-8 pb-0">
-        <ArticleContent article={blogPost} />
-      </Container>
-      <Pattern />
+      <BlurFade delay={0.25} inView direction="up">
+        <Container className="max-w-4xl">
+          <ArticleHero article={blogPost} isFeatured={isFeatured} variant="flat" />
+        </Container>
+      </BlurFade>
+      <BlurFade delay={0.25} inView direction="up">
+        <Container className="-pb-2 max-w-4xl pt-8 pb-0">
+          <ArticleContent article={blogPost} />
+        </Container>
+        <Pattern />
+      </BlurFade>
     </>
   );
 }
