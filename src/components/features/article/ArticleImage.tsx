@@ -18,17 +18,20 @@ export const ArticleImage = ({ image }: ArticleImageProps) => {
         <CtfImage
           nextImageProps={{
             className: cn(
-              'mt-0 mb-0 ',
+              'w-full',
               image.fullWidth
                 ? 'md:w-screen md:max-w-[calc(100vw-40px)] md:shrink-0'
-                : 'rounded-2xl border border-gray300 shadow-lg',
+                : 'rounded-lg',
             ),
           }}
           {...image.image}
         />
       </div>
       {image.caption && (
-        <figcaption className="mt-4" {...inspectorProps({ fieldId: 'caption' })}>
+        <figcaption
+          className="text-muted-foreground mt-2 mb-4 text-center text-sm italic"
+          {...inspectorProps({ fieldId: 'caption' })}
+        >
           {image.caption}
         </figcaption>
       )}

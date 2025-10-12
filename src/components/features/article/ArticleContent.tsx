@@ -16,8 +16,8 @@ export const ArticleContent = ({ article }: ArticleContentProps) => {
   const inspectorProps = useContentfulInspectorMode({ entryId: article.sys.id });
 
   return (
-    <div {...inspectorProps({ fieldId: 'content' })}>
+    <article className="blog-content" {...inspectorProps({ fieldId: 'content' })}>
       <CtfRichText json={content?.json} links={content?.links} />
-    </div>
+    </article>
   );
 };

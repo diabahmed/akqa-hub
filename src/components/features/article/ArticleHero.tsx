@@ -4,13 +4,11 @@ import {
   useContentfulInspectorMode,
   useContentfulLiveUpdates,
 } from '@contentful/live-preview/react';
-import { useTranslation } from 'react-i18next';
 
 import { ArticleAuthor } from '@src/components/features/article/ArticleAuthor';
-import { ArticleLabel } from '@src/components/features/article/ArticleLabel';
 import { CtfImage } from '@src/components/features/contentful';
+import { ContentCard } from '@src/components/shared/content-card';
 import { FormatDate } from '@src/components/shared/format-date';
-import { Card } from '@src/components/ui/card';
 import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
 import { cn } from '@src/lib/utils';
 
@@ -19,69 +17,133 @@ interface ArticleHeroProps {
   isFeatured?: boolean;
   isReversedLayout?: boolean;
   locale?: string;
+  variant?: 'card' | 'flat';
 }
 
 export const ArticleHero = ({
   article,
-  isFeatured,
   isReversedLayout = false,
+  variant = 'card',
 }: ArticleHeroProps) => {
-  const { t } = useTranslation();
   const inspectorProps = useContentfulInspectorMode({ entryId: article.sys.id });
   const { title, shortDescription, publishedDate } = useContentfulLiveUpdates(article);
 
+  // Flat variant for individual blog pages (journal/sketch style)
+  if (variant === 'flat') {
+    return (
+      <div className="space-y-6">
+        {/* Header section */}
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <ArticleAuthor article={article} />
+            <div
+              className="text-muted-foreground ml-auto text-sm"
+              {...inspectorProps({ fieldId: 'publishedDate' })}
+            >
+              <FormatDate date={publishedDate} />
+            </div>
+          </div>
+
+          <h1
+            className="font-heading text-4xl leading-tight font-bold md:text-5xl lg:text-6xl"
+            {...inspectorProps({ fieldId: 'title' })}
+          >
+            {title}
+          </h1>
+
+          {shortDescription && (
+            <p
+              className="blog-subtitle text-muted-foreground"
+              {...inspectorProps({ fieldId: 'shortDescription' })}
+            >
+              {shortDescription}
+            </p>
+          )}
+        </div>
+
+        {/* Featured image - full bleed, sketch-like */}
+        <div
+          className="relative -mx-4 overflow-hidden xl:-mx-0 xl:rounded-lg"
+          {...inspectorProps({ fieldId: 'featuredImage' })}
+        >
+          {article.featuredImage && (
+            <CtfImage
+              nextImageProps={{
+                className: 'w-full aspect-video object-cover',
+                priority: true,
+                sizes: undefined,
+              }}
+              {...article.featuredImage}
+            />
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // Card variant for main page (blog selection)
   return (
-    <Card
+    <ContentCard
+      withPadding={false}
       className={cn(
-        `border-gray300 flex flex-col gap-0 overflow-hidden rounded-2xl border py-0 shadow-lg`,
+        'group flex flex-col overflow-hidden transition-all duration-300 ease-out hover:scale-[1.01]',
         isReversedLayout ? 'lg:flex-row-reverse' : 'lg:flex-row',
       )}
     >
-      <div className="flex-1 basis-1/2" {...inspectorProps({ fieldId: 'featuredImage' })}>
+      <div
+        className="flex-1 basis-1/2 overflow-hidden"
+        {...inspectorProps({ fieldId: 'featuredImage' })}
+      >
         {article.featuredImage && (
           <CtfImage
-            nextImageProps={{ className: 'w-full', priority: true, sizes: undefined }}
+            nextImageProps={{
+              className:
+                'w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.01]',
+              priority: true,
+              sizes: undefined,
+            }}
             {...article.featuredImage}
           />
         )}
       </div>
 
-      <div className="relative flex flex-1 basis-1/2 flex-col justify-center px-4 py-6 lg:px-16 lg:py-12 xl:px-24">
-        <div className="mb-2 flex flex-wrap items-center">
+      <div className="relative flex flex-1 basis-1/2 flex-col justify-center px-6 py-8 lg:px-12 lg:py-12 xl:px-16">
+        <div className="mb-3 flex flex-wrap items-center gap-2">
           <ArticleAuthor article={article} />
-          {isFeatured && (
-            <ArticleLabel
-              className={cn(
-                'ml-auto pl-2 lg:absolute lg:top-8 xl:top-12',
-                isReversedLayout ? 'lg:left-6 xl:left-12' : 'lg:right-6 xl:right-12',
-              )}
-            >
-              {t('article.featured')}
-            </ArticleLabel>
-          )}
           <div
             className={cn(
-              'text-gray600 ml-auto hidden pl-2 text-xs',
-              isReversedLayout ? 'lg:block' : '',
+              'text-muted-foreground ml-auto hidden text-sm lg:block',
+              isReversedLayout ? '' : '',
             )}
             {...inspectorProps({ fieldId: 'publishedDate' })}
           >
             <FormatDate date={publishedDate} />
           </div>
         </div>
-        <h1 {...inspectorProps({ fieldId: 'title' })}>{title}</h1>
+
+        <h2
+          className="font-heading mb-3 text-2xl font-bold md:text-3xl lg:text-4xl"
+          {...inspectorProps({ fieldId: 'title' })}
+        >
+          {title}
+        </h2>
+
         {shortDescription && (
-          <p className="mt-2" {...inspectorProps({ fieldId: 'shortDescription' })}>
+          <p
+            className="text-muted-foreground mb-3 line-clamp-3"
+            {...inspectorProps({ fieldId: 'shortDescription' })}
+          >
             {shortDescription}
           </p>
         )}
+
         <div
-          className={cn('text-gray600 mt-2 text-xs', isReversedLayout ? 'lg:hidden' : '')}
+          className="text-muted-foreground text-sm lg:hidden"
           {...inspectorProps({ fieldId: 'publishedDate' })}
         >
           <FormatDate date={publishedDate} />
         </div>
       </div>
-    </Card>
+    </ContentCard>
   );
 };

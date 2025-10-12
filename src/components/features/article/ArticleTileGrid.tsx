@@ -9,6 +9,15 @@ interface ArticleTileGridProps extends HTMLProps<HTMLDivElement> {
 }
 
 export const ArticleTileGrid = ({ articles, className, ...props }: ArticleTileGridProps) => {
+  const staggerClasses = [
+    'fade-in-3',
+    'fade-in-4',
+    'fade-in-5',
+    'fade-in-6',
+    'fade-in-6',
+    'fade-in-6',
+  ];
+
   return articles && articles.length > 0 ? (
     <div
       className={cn(
@@ -18,7 +27,13 @@ export const ArticleTileGrid = ({ articles, className, ...props }: ArticleTileGr
       {...props}
     >
       {articles.map((article, index) => {
-        return article ? <ArticleTile key={article.slug || index} article={article} /> : null;
+        return article ? (
+          <ArticleTile
+            key={article.slug || index}
+            article={article}
+            className={staggerClasses[index] || 'fade-in-6'}
+          />
+        ) : null;
       })}
     </div>
   ) : null;
