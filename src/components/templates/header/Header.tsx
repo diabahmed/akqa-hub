@@ -3,7 +3,8 @@
 import { motion, useScroll, useMotionValueEvent } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import { LanguageSelector } from '@src/components/features/language-selector/LanguageSelector';
 import { AnimatedThemeToggler } from '@src/components/ui/animated-theme-toggler';
@@ -59,9 +60,48 @@ export const Header = () => {
   );
 };
 
+const links = [
+  { name: 'Buttons', href: '/buttons' },
+  { name: 'Typography', href: '/typography' },
+];
+
 const NavList = () => {
+  const pathname = usePathname();
+  const [showDevLinks, setShowDevLinks] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Toggle dev links with Cmd+Shift+D (Mac) or Ctrl+Shift+D (Windows/Linux)
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'd') {
+        e.preventDefault();
+        setShowDevLinks(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className="flex items-center gap-8">
+      {showDevLinks && (
+        <div className="hidden items-center gap-4 text-sm md:flex">
+          {links.map(link => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`${
+                pathname === link.href
+                  ? 'text-muted-foreground pointer-events-none'
+                  : 'text-primary/80 hover:text-primary transition-all hover:-mt-px hover:mb-px'
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+      )}
+
       <div className="flex items-center gap-1">
         <AnimatedThemeToggler />
         <LanguageSelector />
