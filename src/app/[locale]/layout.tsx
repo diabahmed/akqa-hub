@@ -1,4 +1,3 @@
-import { AIDevtools } from '@ai-sdk-tools/devtools';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { dir } from 'i18next';
@@ -8,10 +7,11 @@ import { draftMode } from 'next/headers';
 import {
   fkDisplay,
   fkGrotesk,
+  goudyOldStyle,
   jetBrainsMono,
   ppEditorialNew,
-  goudyOldStyle,
 } from '@public/assets/fonts/fonts';
+import { ChatWidget } from '@src/components/custom/chat-widget';
 import { MusicToggleButton } from '@src/components/custom/music-button';
 import { ThemeProvider } from '@src/components/custom/theme-provider';
 import { ContentfulPreviewProvider } from '@src/components/features/contentful';
@@ -84,22 +84,18 @@ export default async function PageLayout({ children, params }: LayoutProps) {
                   {children}
                 </div>
                 <Footer />
-                <Toaster position="top-center" closeButton richColors />
+                <Toaster position="top-center" richColors />
                 <Background />
                 <Analytics />
                 <SpeedInsights />
               </main>
-              <div className="fixed bottom-4 left-4 z-50">
+              <div className="fixed bottom-5 left-6 z-50">
                 <MusicToggleButton />
               </div>
+              <div className="fixed right-6 bottom-5 z-50">
+                <ChatWidget />
+              </div>
               <div id="portal" className="font-body" />
-              <AIDevtools
-                config={{
-                  enabled: process.env.NODE_ENV === 'development',
-                  position: 'overlay',
-                  theme: 'auto',
-                }}
-              />
             </ContentfulPreviewProvider>
           </TranslationsProvider>
         </ThemeProvider>
