@@ -3,9 +3,11 @@
 import type { UIMessage } from '@ai-sdk/react';
 import { useChat } from '@ai-sdk/react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 import type { PromptInputMessage } from '@src/components/ai-elements/prompt-input';
 import { Chat } from '@src/components/custom/chat';
+import { BlurFade } from '@src/components/ui/blur-fade';
 
 const suggestions = [
   'Summarize this blog',
@@ -31,6 +33,11 @@ export default function ChatPage() {
   const [input, setInput] = useState('');
   const { messages, sendMessage, status, regenerate, stop, setMessages } = useChat({
     messages: initialMessages,
+    onError: error => {
+      toast.error('Something went wrong', {
+        description: error.message || 'Failed to get a response. Please try again.',
+      });
+    },
   });
 
   // Count only user messages (excluding system/assistant greetings)
@@ -62,20 +69,22 @@ export default function ChatPage() {
   };
 
   return (
-    <Chat
-      messages={messages}
-      status={status}
-      input={input}
-      suggestions={suggestions}
-      showSuggestions={userMessageCount === 0}
-      onInputChange={setInput}
-      onSubmit={handleSubmit}
-      onSuggestionClick={handleSuggestionClick}
-      onRegenerate={regenerate}
-      onStop={handleStop}
-      placeholder="What would you like to explore?"
-      inputMinHeight="20px"
-      inputMaxHeight="100px"
-    />
+    <BlurFade delay={0.25} inView direction="up">
+      <Chat
+        messages={messages}
+        status={status}
+        input={input}
+        suggestions={suggestions}
+        showSuggestions={userMessageCount === 0}
+        onInputChange={setInput}
+        onSubmit={handleSubmit}
+        onSuggestionClick={handleSuggestionClick}
+        onRegenerate={regenerate}
+        onStop={handleStop}
+        placeholder="What would you like to explore?"
+        inputMinHeight="20px"
+        inputMaxHeight="100px"
+      />
+    </BlurFade>
   );
 }
