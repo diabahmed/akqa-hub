@@ -2,6 +2,7 @@
 
 import type { UIMessage } from '@ai-sdk/react';
 import { useChat } from '@ai-sdk/react';
+import { useParams, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -9,10 +10,10 @@ import type { PromptInputMessage } from '@src/components/ai-elements/prompt-inpu
 import ChatDialog from '@src/components/custom/chat-dialog';
 
 const suggestions = [
-  'Summarize an article',
-  'Find similar content',
-  'What themes connect these pieces?',
-  'Solve advent of code 2023 day 1 in Rust',
+  'Summarize this article',
+  'What are related articles?',
+  'Search for articles about art',
+  'Tell me more about this post',
 ];
 
 const initialMessages: UIMessage[] = [
@@ -29,9 +30,16 @@ const initialMessages: UIMessage[] = [
 ];
 
 export function ChatWidget() {
+  const pathname = usePathname();
+  const params = useParams();
   const [input, setInput] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [reasoningDurations, setReasoningDurations] = useState<Map<string, number>>(new Map());
+
+  // Extract context from URL
+  const currentSlug = pathname?.split('/').pop();
+  const locale = (params?.locale as string) || 'en-US';
+
   const { messages, sendMessage, status, regenerate, stop, setMessages } = useChat({
     messages: initialMessages,
     onError: error => {
@@ -48,8 +56,17 @@ export function ChatWidget() {
     if (!message.text) {
       return;
     }
+
+    // Add context as metadata (not visible to user, sent to API)
+    const metadata: Record<string, any> = {};
+    if (currentSlug && !pathname?.includes('/admin')) {
+      metadata.currentSlug = currentSlug;
+      metadata.locale = locale;
+    }
+
     sendMessage({
       text: message.text,
+      metadata,
     });
     setInput('');
   };

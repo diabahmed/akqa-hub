@@ -1,3 +1,4 @@
+import { AIDevtools } from '@ai-sdk-tools/devtools';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { dir } from 'i18next';
@@ -96,6 +97,13 @@ export default async function PageLayout({ children, params }: LayoutProps) {
                 <ChatWidget />
               </div>
               <div id="portal" className="font-body" />
+              <AIDevtools
+                config={{
+                  enabled: process.env.NODE_ENV === 'development',
+                  position: 'overlay',
+                  theme: 'auto',
+                }}
+              />
             </ContentfulPreviewProvider>
           </TranslationsProvider>
         </ThemeProvider>
