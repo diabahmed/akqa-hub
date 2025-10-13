@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 
 import { useAudio } from '@src/contexts/audio-context';
+import { cn } from '@src/lib/utils';
 
 export const MusicToggleButton = () => {
   const bars = 5;
@@ -52,7 +53,11 @@ export const MusicToggleButton = () => {
       whileHover={{ padding: '18px 22px ' }}
       whileTap={{ padding: '18px 22px ' }}
       transition={{ duration: 1, bounce: 0.6, type: 'spring' }}
-      className="border-foreground bg-background/60 supports-[backdrop-filter]:bg-background/60 focus:ring-primary cursor-pointer rounded-full border p-2 backdrop-blur-xs focus:ring-2 focus:ring-offset-2 focus:outline-none"
+      className={cn(
+        'border-foreground bg-background/60 supports-[backdrop-filter]:bg-background/60 rounded-full border p-2 backdrop-blur-xs',
+        'focus-visible:border-ring focus-visible:ring-ring/50 outline-none focus-visible:ring-[3px]',
+        'disabled:pointer-events-none disabled:opacity-50',
+      )}
       type="button"
       aria-label={isPlaying ? 'Pause background music' : 'Play background music'}
       aria-pressed={isPlaying}
