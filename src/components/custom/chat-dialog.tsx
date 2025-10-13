@@ -30,6 +30,8 @@ interface ChatDialogProps {
   onRegenerate: () => void;
   onStop?: () => void;
   onReset?: () => void;
+  reasoningDurations?: Map<string, number>;
+  onReasoningDurationChange?: (messageId: string, partIndex: number, duration: number) => void;
   placeholder?: string;
   inputMinHeight?: string;
   inputMaxHeight?: string;
@@ -49,6 +51,8 @@ export default function ChatDialog({
   onRegenerate,
   onStop,
   onReset,
+  reasoningDurations,
+  onReasoningDurationChange,
   placeholder = 'What would you like to explore?',
   inputMinHeight = '20px',
   inputMaxHeight = '100px',
@@ -101,6 +105,8 @@ export default function ChatDialog({
               onRegenerate={onRegenerate}
               onStop={onStop}
               onReset={onReset}
+              reasoningDurations={reasoningDurations}
+              onReasoningDurationChange={onReasoningDurationChange}
               placeholder={placeholder}
               inputMinHeight={inputMinHeight}
               inputMaxHeight={inputMaxHeight}

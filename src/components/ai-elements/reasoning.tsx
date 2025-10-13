@@ -6,8 +6,8 @@ import { AnimatePresence, motion } from 'motion/react';
 import type { ComponentProps } from 'react';
 import { createContext, memo, useContext, useEffect, useState } from 'react';
 
-import { Response } from './response';
 import LoaderShader from '../custom/loader-shader';
+import { Response } from './response';
 
 import {
   Collapsible,
@@ -41,6 +41,7 @@ export type ReasoningProps = ComponentProps<typeof Collapsible> & {
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
   duration?: number;
+  onDurationChange?: (duration: number) => void;
   hasContent?: boolean;
 };
 
@@ -55,6 +56,7 @@ export const Reasoning = memo(
     defaultOpen = true,
     onOpenChange,
     duration: durationProp,
+    onDurationChange,
     hasContent = true,
     children,
     ...props
@@ -67,6 +69,7 @@ export const Reasoning = memo(
     const [duration, setDuration] = useControllableState({
       prop: durationProp,
       defaultProp: 0,
+      onChange: onDurationChange,
     });
 
     const [hasAutoClosed, setHasAutoClosed] = useState(false);
@@ -167,10 +170,10 @@ const ThinkingMessage = memo(() => {
 ThinkingMessage.displayName = 'ThinkingMessage';
 
 const getThinkingMessage = (isStreaming: boolean, duration?: number) => {
-  if (isStreaming || duration === 0) {
+  if (isStreaming) {
     return <ThinkingMessage />;
   }
-  if (duration === undefined) {
+  if (duration === undefined || duration === 0) {
     return <p>Thought for a few seconds</p>;
   }
   return <p>Thought for {duration} seconds</p>;

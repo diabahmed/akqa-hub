@@ -31,6 +31,7 @@ const initialMessages: UIMessage[] = [
 export function ChatWidget() {
   const [input, setInput] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [reasoningDurations, setReasoningDurations] = useState<Map<string, number>>(new Map());
   const { messages, sendMessage, status, regenerate, stop, setMessages } = useChat({
     messages: initialMessages,
     onError: error => {
@@ -71,8 +72,21 @@ export function ChatWidget() {
   const handleReset = () => {
     setMessages(initialMessages);
     setInput('');
+    setReasoningDurations(new Map());
     toast.success('Conversation cleared', {
       description: 'Starting a fresh conversation with Lumen.',
+    });
+  };
+
+  const handleReasoningDurationChange = (
+    messageId: string,
+    partIndex: number,
+    duration: number,
+  ) => {
+    setReasoningDurations(prev => {
+      const next = new Map(prev);
+      next.set(`${messageId}-${partIndex}`, duration);
+      return next;
     });
   };
 
@@ -91,6 +105,8 @@ export function ChatWidget() {
       onRegenerate={regenerate}
       onStop={handleStop}
       onReset={handleReset}
+      reasoningDurations={reasoningDurations}
+      onReasoningDurationChange={handleReasoningDurationChange}
       placeholder="What would you like to explore?"
       inputMinHeight="20px"
       inputMaxHeight="100px"

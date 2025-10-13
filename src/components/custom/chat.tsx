@@ -49,6 +49,8 @@ interface ChatProps {
   onRegenerate: () => void;
   onStop?: () => void;
   onReset?: () => void;
+  reasoningDurations?: Map<string, number>;
+  onReasoningDurationChange?: (messageId: string, partIndex: number, duration: number) => void;
   placeholder?: string;
   inputMinHeight?: string;
   inputMaxHeight?: string;
@@ -66,6 +68,8 @@ export function Chat({
   onRegenerate,
   onStop,
   onReset,
+  reasoningDurations,
+  onReasoningDurationChange,
   placeholder = 'Ask anything...',
   inputMinHeight = '20px',
   inputMaxHeight = '100px',
@@ -114,6 +118,9 @@ export function Chat({
                       i === message.parts.length - 1 &&
                       message.id === messages.at(-1)?.id;
 
+                    const durationKey = `${message.id}-${i}`;
+                    const savedDuration = reasoningDurations?.get(durationKey);
+
                     return (
                       <Reasoning
                         key={`${message.id}-${i}`}
@@ -122,6 +129,12 @@ export function Chat({
                         hasContent={!!hasReasoningContent}
                         open={hasReasoningContent ? undefined : false}
                         defaultOpen={!!hasReasoningContent}
+                        duration={savedDuration}
+                        onDurationChange={duration => {
+                          if (onReasoningDurationChange) {
+                            onReasoningDurationChange(message.id, i, duration);
+                          }
+                        }}
                       >
                         <ReasoningTrigger />
                         {hasReasoningContent && <ReasoningContent>{part.text}</ReasoningContent>}
