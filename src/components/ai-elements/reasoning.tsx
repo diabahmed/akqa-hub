@@ -2,16 +2,19 @@
 
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import { BrainIcon, ChevronDownIcon } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import type { ComponentProps } from 'react';
 import { createContext, memo, useContext, useEffect, useState } from 'react';
 
 import { Response } from './response';
+import ShaderAvatar from '../custom/shader-avatar';
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@src/components/ui/collapsible';
+import { TextShimmer } from '@src/components/ui/text-shimmer';
 import { cn } from '@src/lib/utils';
 
 type ReasoningContextValue = {
@@ -19,6 +22,7 @@ type ReasoningContextValue = {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   duration: number;
+  hasContent: boolean;
 };
 
 const ReasoningContext = createContext<ReasoningContextValue | null>(null);
@@ -37,6 +41,7 @@ export type ReasoningProps = ComponentProps<typeof Collapsible> & {
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
   duration?: number;
+  hasContent?: boolean;
 };
 
 const AUTO_CLOSE_DELAY = 1000;
@@ -50,6 +55,7 @@ export const Reasoning = memo(
     defaultOpen = true,
     onOpenChange,
     duration: durationProp,
+    hasContent = true,
     children,
     ...props
   }: ReasoningProps) => {
@@ -93,11 +99,13 @@ export const Reasoning = memo(
     }, [isStreaming, isOpen, defaultOpen, setIsOpen, hasAutoClosed]);
 
     const handleOpenChange = (newOpen: boolean) => {
+      // Prevent opening if there's no content
+      if (!hasContent) return;
       setIsOpen(newOpen);
     };
 
     return (
-      <ReasoningContext.Provider value={{ isStreaming, isOpen, setIsOpen, duration }}>
+      <ReasoningContext.Provider value={{ isStreaming, isOpen, setIsOpen, duration, hasContent }}>
         <Collapsible
           className={cn('not-prose mb-4', className)}
           onOpenChange={handleOpenChange}
@@ -113,9 +121,52 @@ export const Reasoning = memo(
 
 export type ReasoningTriggerProps = ComponentProps<typeof CollapsibleTrigger>;
 
+const thinkingPhrases = [
+  'Synthesizing...',
+  'Weaving...',
+  'Distilling...',
+  'Contemplating...',
+  'Illuminating...',
+  'Curating...',
+  'Tracing...',
+  'Mapping...',
+  'Composing...',
+  'Crystallizing...',
+];
+
+const ThinkingMessage = memo(() => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % thinkingPhrases.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={currentIndex}
+        initial={{ opacity: 0, y: 5 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -5 }}
+        transition={{ duration: 0.3 }}
+      >
+        <TextShimmer duration={2} className="text-sm">
+          {thinkingPhrases[currentIndex]}
+        </TextShimmer>
+      </motion.div>
+    </AnimatePresence>
+  );
+});
+
+ThinkingMessage.displayName = 'ThinkingMessage';
+
 const getThinkingMessage = (isStreaming: boolean, duration?: number) => {
   if (isStreaming || duration === 0) {
-    return <p>Thinking...</p>;
+    return <ThinkingMessage />;
   }
   if (duration === undefined) {
     return <p>Thought for a few seconds</p>;
@@ -124,23 +175,28 @@ const getThinkingMessage = (isStreaming: boolean, duration?: number) => {
 };
 
 export const ReasoningTrigger = memo(({ className, children, ...props }: ReasoningTriggerProps) => {
-  const { isStreaming, isOpen, duration } = useReasoning();
+  const { isStreaming, isOpen, duration, hasContent } = useReasoning();
 
   return (
     <CollapsibleTrigger
+      disabled={!hasContent}
       className={cn(
-        'text-muted-foreground hover:text-foreground flex w-full items-center gap-2 text-sm transition-colors',
+        'text-muted-foreground flex w-full items-center gap-2 text-sm transition-colors',
+        hasContent && 'hover:text-foreground cursor-pointer',
+        !hasContent && 'cursor-default',
         className,
       )}
       {...props}
     >
       {children ?? (
         <>
-          <BrainIcon className="size-4" />
+          {isStreaming ? <ShaderAvatar /> : <BrainIcon className="size-4" />}
           {getThinkingMessage(isStreaming, duration)}
-          <ChevronDownIcon
-            className={cn('size-4 transition-transform', isOpen ? 'rotate-180' : 'rotate-0')}
-          />
+          {hasContent && (
+            <ChevronDownIcon
+              className={cn('size-4 transition-transform', isOpen ? 'rotate-180' : 'rotate-0')}
+            />
+          )}
         </>
       )}
     </CollapsibleTrigger>
