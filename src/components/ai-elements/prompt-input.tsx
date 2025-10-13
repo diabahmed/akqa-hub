@@ -2,7 +2,7 @@
 
 import type { ChatStatus, FileUIPart } from 'ai';
 import {
-  ArrowUp,
+  CircleArrowUp,
   ImageIcon,
   Loader2Icon,
   MicIcon,
@@ -897,7 +897,7 @@ export const PromptInputSubmit = ({
   children,
   ...props
 }: PromptInputSubmitProps) => {
-  let Icon = <ArrowUp className="size-4" />;
+  let Icon = <CircleArrowUp className="size-4" />;
 
   if (status === 'submitted') {
     Icon = <Loader2Icon className="size-4 animate-spin" />;
