@@ -135,7 +135,9 @@ const thinkingPhrases = [
 ];
 
 const ThinkingMessage = memo(() => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(() =>
+    Math.floor(Math.random() * thinkingPhrases.length),
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
