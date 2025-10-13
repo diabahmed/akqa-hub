@@ -6,8 +6,8 @@ import { AnimatePresence, motion } from 'motion/react';
 import type { ComponentProps } from 'react';
 import { createContext, memo, useContext, useEffect, useState } from 'react';
 
-import LoaderShader from '../custom/loader-shader';
 import { Response } from './response';
+import LoaderShader from '../custom/loader-shader';
 
 import {
   Collapsible,
