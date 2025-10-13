@@ -7,7 +7,7 @@ import type { ComponentProps } from 'react';
 import { createContext, memo, useContext, useEffect, useState } from 'react';
 
 import { Response } from './response';
-import ShaderAvatar from '../custom/shader-avatar';
+import LoaderShader from '../custom/loader-shader';
 
 import {
   Collapsible,
@@ -192,7 +192,7 @@ export const ReasoningTrigger = memo(({ className, children, ...props }: Reasoni
     >
       {children ?? (
         <>
-          {isStreaming ? <ShaderAvatar /> : <BrainIcon className="size-4" />}
+          {isStreaming ? <LoaderShader /> : <BrainIcon className="size-4" />}
           {getThinkingMessage(isStreaming, duration)}
           {hasContent && (
             <ChevronDownIcon
