@@ -3,6 +3,8 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
+import { AnimatedIconButton } from './animated-icon-button';
+
 import { Button } from '@src/components/ui/button';
 import { Input } from '@src/components/ui/input';
 import { Textarea } from '@src/components/ui/textarea';
@@ -96,14 +98,16 @@ function InputGroupButton({
   type = 'button',
   variant = 'ghost',
   size = 'xs',
+  children,
   ...props
 }: Omit<React.ComponentProps<typeof Button>, 'size'> &
   VariantProps<typeof inputGroupButtonVariants>) {
   return (
-    <Button
+    <AnimatedIconButton
       type={type}
       data-size={size}
       variant={variant}
+      icon={children}
       className={cn(inputGroupButtonVariants({ size }), className)}
       {...props}
     />
@@ -152,7 +156,7 @@ export {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
-  InputGroupText,
   InputGroupInput,
+  InputGroupText,
   InputGroupTextarea,
 };
