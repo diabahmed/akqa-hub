@@ -61,7 +61,6 @@ export const Header = () => {
 };
 
 const links = [
-  { name: 'Chat', href: '/chat' },
   { name: 'Buttons', href: '/buttons' },
   { name: 'Typography', href: '/typography' },
 ];
