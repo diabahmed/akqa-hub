@@ -10,6 +10,14 @@
 
 ---
 
+<img width="1512" height="856" alt="Screenshot 2025-10-13 at 4 17 24 PM" src="https://github.com/user-attachments/assets/2b0a273b-b62b-4b81-b347-8dcd767e6fb2" />
+<img width="1512" height="856" alt="Screenshot 2025-10-13 at 4 17 35 PM" src="https://github.com/user-attachments/assets/d9858aeb-d8ca-42cc-9b89-557fca620d85" />
+<img width="1512" height="856" alt="Screenshot 2025-10-13 at 4 17 45 PM" src="https://github.com/user-attachments/assets/5eca1c02-4915-449d-93a1-9398272e9c56" />
+<img width="1512" height="856" alt="Screenshot 2025-10-13 at 4 18 02 PM" src="https://github.com/user-attachments/assets/ad9df617-92f2-49ab-b95a-c8f560d28590" />
+<img width="1512" height="856" alt="Screenshot 2025-10-13 at 4 18 21 PM" src="https://github.com/user-attachments/assets/077c7c02-de68-4061-8b5c-2e16f57ec542" />
+
+---
+
 ## The Story
 
 This project is a synthesis of three forces: **artistic inspiration**, **scientific rigor**, and **AI amplification**. Each influenced the final product in profound ways.
