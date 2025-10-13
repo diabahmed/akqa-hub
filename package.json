@@ -118,6 +118,7 @@
     "react-wrap-balancer": "^1.1.1",
     "recharts": "2.15.4",
     "sharp": "0.34.4",
+    "shiki": "^3.13.0",
     "sonner": "^2.0.7",
     "streamdown": "^1.4.0",
     "three": "^0.180.0",
@@ -169,5 +170,6 @@
     "tsx": "^4.20.6",
     "tw-animate-css": "^1.4.0",
     "typescript": "5.9.3"
-  }
+  },
+  "packageManager": "pnpm@10.18.2+sha512.9fb969fa749b3ade6035e0f109f0b8a60b5d08a1a87fdf72e337da90dcc93336e2280ca4e44f2358a649b83c17959e9993e777c2080879f3801e6f0d999ad3dd"
 }
