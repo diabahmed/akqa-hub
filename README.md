@@ -388,6 +388,7 @@ cp .env.example .env  # Add: CONTENTFUL_*, DATABASE_URL, OPENAI_API_KEY
 pnpm db:migrate
 pnpm db:sync-content
 pnpm dev  # Visit http://localhost:3000
+pnpm docker:up  # Alternative start with Docker
 ```
 
 **Sync content:** `pnpm db:sync-content` or use admin UI at `/en-US/admin/sync`
