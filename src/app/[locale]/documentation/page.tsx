@@ -70,7 +70,7 @@ export default function DocumentationPage() {
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <a
-              href="/docs/COMPLETE_TECHNICAL_DOCUMENTATION.md"
+              href="https://github.com/diabahmed/akqa-hub/blob/main/docs/TECHNICAL_DOCUMENTATION_2.md"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-card hover:bg-accent group relative overflow-hidden rounded-lg border p-6 transition-colors"
@@ -88,7 +88,7 @@ export default function DocumentationPage() {
             </a>
 
             <a
-              href="/docs/TYPOGRAPHY_GUIDE.md"
+              href="https://github.com/diabahmed/akqa-hub/blob/main/docs/TYPOGRAPHY_GUIDE.md"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-card hover:bg-accent group relative overflow-hidden rounded-lg border p-6 transition-colors"
@@ -104,7 +104,7 @@ export default function DocumentationPage() {
             </a>
 
             <a
-              href="/docs/TECHNICAL_DOCUMENTATION.md"
+              href="https://github.com/diabahmed/akqa-hub/blob/main/docs/TECHNICAL_DOCUMENTATION_1.md"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-card hover:bg-accent group relative overflow-hidden rounded-lg border p-6 transition-colors"
