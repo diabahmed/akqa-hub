@@ -1,9 +1,20 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Container } from '@src/components/shared/container';
 import { BlurFade } from '@src/components/ui/blur-fade';
 import { Button } from '@src/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@src/components/ui/card';
+
+export const metadata: Metadata = {
+  title: 'Admin Dashboard',
+  description:
+    'RAG System Administration - Manage content synchronization and monitor the vector database powering AI-assisted content discovery.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function AdminPage() {
   return (

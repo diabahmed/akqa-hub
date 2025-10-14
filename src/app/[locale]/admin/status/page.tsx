@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Container } from '@src/components/shared/container';
@@ -5,6 +6,16 @@ import { BlurFade } from '@src/components/ui/blur-fade';
 import { Button } from '@src/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@src/components/ui/card';
 import { getAllSyncedArticlesAction, getSyncStatusAction } from '@src/lib/actions/get-sync-status';
+
+export const metadata: Metadata = {
+  title: 'Sync Status',
+  description:
+    'Monitor RAG system status and view all synchronized articles in the vector database.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function StatusPage({
   searchParams,
