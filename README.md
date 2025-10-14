@@ -374,7 +374,7 @@ AI was a force multiplier, not a replacement. It handled the "how" so I could fo
 
 ## 🏗️ Architecture
 
-![Architecture Diagram](./docs/images/akqa-hub_system.png)
+<img width="2133" height="1241" alt="akqa-hub_system" src="https://github.com/user-attachments/assets/eb375127-2517-4ec9-b243-04e8921db1d3" />
 
 ---
 
