@@ -385,14 +385,12 @@ git clone https://github.com/diabahmed/akqa-hub.git
 cd akqa-hub
 pnpm install
 cp .env.example .env  # Add: CONTENTFUL_*, DATABASE_URL, OPENAI_API_KEY
-pnpm db:generate
 pnpm db:migrate
-pnpm codegen
-pnpm db:sync-embeddings
+pnpm db:sync-content
 pnpm dev  # Visit http://localhost:3000
 ```
 
-**Sync content:** `pnpm db:sync-embeddings` or use admin UI at `/en-US/admin/sync`
+**Sync content:** `pnpm db:sync-content` or use admin UI at `/en-US/admin/sync`
 
 ---
 
@@ -405,8 +403,8 @@ pnpm dev  # Visit http://localhost:3000
 
 ## 📚 Documentation
 
-- [Technical Documentation](./docs/TECHNICAL_DOCUMENTATION_1.md) — CMS integration and data flow
-- [Complete Technical Documentation](./docs/TECHNICAL_DOCUMENTATION_2.md) — 1,200+ lines covering every architectural decision
-- [Typography Guide](./docs/TYPOGRAPHY_GUIDE.md) — Font system and usage patterns
+- [Technical Documentation](https://github.com/diabahmed/akqa-hub/blob/main/docs/TECHNICAL_DOCUMENTATION_1.md) — CMS integration and data flow
+- [Complete Technical Documentation](https://github.com/diabahmed/akqa-hub/blob/main/docs/TECHNICAL_DOCUMENTATION_2.md) — 1,200+ lines covering every architectural decision
+- [Typography Guide](https://github.com/diabahmed/akqa-hub/blob/main/docs/TYPOGRAPHY_GUIDE.md) — Font system and usage patterns
 
 ---
