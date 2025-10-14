@@ -64,6 +64,7 @@ const links = [
   { name: 'Admin', href: '/admin' },
   { name: 'Buttons', href: '/buttons' },
   { name: 'Typography', href: '/typography' },
+  { name: 'Documentation', href: '/documentation' },
 ];
 
 const NavList = () => {
