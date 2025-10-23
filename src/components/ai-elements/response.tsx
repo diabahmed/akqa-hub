@@ -28,7 +28,6 @@ export const Response = memo(
           {
             defaultOrigin: typeof window !== 'undefined' ? window.location.origin : '',
             allowedLinkPrefixes: ['mailto:', '*'],
-            sameTab: true,
           },
         ],
       ]}
