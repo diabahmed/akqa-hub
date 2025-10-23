@@ -10,7 +10,38 @@ import type { NewBlogEmbedding } from '@src/db/schema/blog-embeddings';
 import { client } from '@src/lib/client';
 
 /**
- * Sync a single blog post to vector database
+ * Sync a single blog post to vector database by Contentful ID
+ * Used by webhooks when content is updated
+ */
+export async function syncBlogPostToVectorDB(
+  contentfulId: string,
+  locale: string = 'en-US',
+): Promise<void> {
+  try {
+    // First, fetch the blog post collection to find the slug for this ID
+    const { pageBlogPostCollection } = await client.pageBlogPostCollection({
+      locale,
+      limit: 100,
+    });
+
+    const blogPost = pageBlogPostCollection?.items.find(post => post?.sys.id === contentfulId);
+
+    if (!blogPost || !blogPost.slug) {
+      throw new Error(`Blog post not found with ID: ${contentfulId}`);
+    }
+
+    // Use the existing syncBlogPost function with the slug
+    await syncBlogPost(blogPost.slug, locale);
+
+    console.log(`✅ Webhook sync completed for blog post ID: ${contentfulId}`);
+  } catch (error) {
+    console.error(`❌ Error syncing blog post ${contentfulId}:`, error);
+    throw error;
+  }
+}
+
+/**
+ * Sync a single blog post to vector database by slug
  */
 export async function syncBlogPost(slug: string, locale: string = 'en-US'): Promise<void> {
   try {
